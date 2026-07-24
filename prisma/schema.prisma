@@ -1,0 +1,88 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model AdminUser {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  password  String
+  name      String?
+  createdAt DateTime @default(now())
+}
+
+model ContactSetting {
+  id           Int           @id @default(autoincrement())
+  email        String
+  address      String
+  updatedAt    DateTime      @updatedAt
+  phoneNumbers PhoneNumber[]
+}
+
+model PhoneNumber {
+  id               Int             @id @default(autoincrement())
+  number           String
+  contactSettingId Int?
+  contactSetting   ContactSetting? @relation(fields: [contactSettingId], references: [id])
+}
+
+model Project {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  image       String
+  client      String
+  category    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Reference {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  category    String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  number      String   @unique
+  title       String
+  description String
+  icon        String?
+  image       String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Section {
+  id        Int      @id @default(autoincrement())
+  slug      String   @unique
+  title     String
+  content   String
+  order     Int      @default(0)
+  visible   Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Client {
+  id          Int     @id @default(autoincrement())
+  name        String
+  logo        String?
+  description String?
+  website     String?
+}
+
+model ContactMessage {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String
+  message   String
+  createdAt DateTime @default(now())
+}

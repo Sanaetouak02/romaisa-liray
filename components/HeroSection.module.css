@@ -1,0 +1,269 @@
+/* --- CONFIGURATION GLOBALE --- */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'DM Sans', Arial, sans-serif;
+  padding-bottom: 80px; /* Espace supplémentaire en bas */
+}
+
+.heroImage {
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Overlay avec effet ovale blanc au centre */
+.heroShade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+    rgba(3, 27, 80, 0.4) 0%, 
+    rgba(3, 27, 80, 0.2) 25%, 
+    rgba(255, 255, 255, 0.85) 40%, 
+    rgba(255, 255, 255, 0.95) 50%, 
+    rgba(255, 255, 255, 0.85) 60%, 
+    rgba(3, 27, 80, 0.2) 75%, 
+    rgba(3, 27, 80, 0.4) 100%
+  );
+  z-index: 1;
+}
+
+/* Forme ovale blanche ajustée pour laisser plus d'image en bas */
+.heroShade::before {
+  content: '';
+  position: absolute;
+  top: 5%;
+  left: 20%;
+  right: 20%;
+  bottom: 45%; /* Augmenté de 35% à 45% pour laisser plus d'image visible */
+  background: radial-gradient(ellipse at center, 
+    rgba(255, 255, 255, 0.95) 0%, 
+    rgba(255, 255, 255, 0.85) 50%, 
+    rgba(255, 255, 255, 0.6) 100%
+  );
+  border-radius: 50%;
+  filter: blur(20px);
+  z-index: 1;
+}
+
+/* --- CONTENU CENTRAL --- */
+.heroContent {
+  position: relative;
+  z-index: 2;
+  width: min(900px, 90vw);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px; /* Espace supplémentaire après les boutons */
+}
+
+.heroLogoWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.heroLogoMain {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 15px rgba(0, 0, 0, 0.3));
+}
+
+.heroBrandText {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+/* EURL en bleu nuit */
+.heroEurl {
+  color: #031b50;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.4em;
+  margin: 0;
+}
+
+/* ROMAISA LIRAY en bleu nuit */
+.heroCompanyName {
+  color: #031b50;
+  font-size: clamp(28px, 5vw, 44px);
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  margin: 0;
+  text-transform: uppercase;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Titre principal */
+.heroMainTitle {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: clamp(56px, 9vw, 110px);
+  line-height: 0.9;
+  margin: 10px 0 15px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  text-align: center;
+}
+
+/* TRAVAUX D'ASSAINISSEMENT en bleu nuit foncé */
+.heroMainTitle {
+  color: #031b50;
+  text-shadow: 0 4px 20px rgba(3, 27, 80, 0.3);
+}
+
+/* ET HYDRAULIQUE en gris métallique/argent */
+.heroTitleHighlight {
+  display: block;
+  background: linear-gradient(180deg, #c0c0c0 0%, #808080 40%, #606060 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+  margin-top: 5px;
+  font-weight: 700;
+}
+
+/* EXPERTISE • QUALITÉ... en noir */
+.heroValues {
+  color: #000000;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin: 0 0 35px;
+  text-align: center;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* --- BOUTONS --- */
+.heroActions {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 10;
+}
+
+.button {
+  padding: 16px 32px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 700;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border-radius: 6px;
+  text-decoration: none;
+  cursor: pointer;
+  min-width: 180px;
+}
+
+.buttonBlue {
+  background: linear-gradient(135deg, #0789fb 0%, #075bd8 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(7, 91, 216, 0.4);
+}
+
+.buttonBlue:hover {
+  background: linear-gradient(135deg, #075bd8 0%, #031b50 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(7, 91, 216, 0.6);
+}
+
+.buttonOutline {
+  background: rgba(255, 255, 255, 0.9);
+  border: 2px solid #031b50;
+  color: #031b50;
+  backdrop-filter: blur(10px);
+}
+
+.buttonOutline:hover {
+  background: rgba(3, 27, 80, 0.1);
+  border-color: #031b50;
+  transform: translateY(-2px);
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .hero {
+    min-height: 90vh;
+    padding-bottom: 60px;
+  }
+
+  .heroShade::before {
+    left: 15%;
+    right: 15%;
+    bottom: 40%; /* Ajusté pour mobile */
+  }
+
+  .heroContent {
+    margin-bottom: 30px;
+  }
+
+  .heroLogoMain {
+    width: 85px;
+    height: 85px;
+  }
+
+  .heroMainTitle {
+    font-size: 50px;
+  }
+}
+
+@media (max-width: 530px) {
+  .hero {
+    min-height: 85vh;
+    padding-bottom: 50px;
+  }
+
+  .heroShade {
+    background: linear-gradient(90deg, 
+      rgba(3, 27, 80, 0.3) 0%, 
+      rgba(255, 255, 255, 0.85) 20%, 
+      rgba(255, 255, 255, 0.95) 50%, 
+      rgba(255, 255, 255, 0.85) 80%, 
+      rgba(3, 27, 80, 0.3) 100%
+    );
+  }
+
+  .heroShade::before {
+    left: 5%;
+    right: 5%;
+    top: 2%;
+    bottom: 35%; /* Ajusté pour mobile */
+  }
+
+  .heroContent {
+    margin-bottom: 25px;
+  }
+
+  .heroMainTitle {
+    font-size: 40px;
+  }
+
+  .heroValues {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+  }
+
+  .button {
+    width: 100%;
+    min-width: unset;
+  }
+}

@@ -1,0 +1,97 @@
+/* =========================================
+   1. IMPORTS DES POLICES
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;600;700;800&display=swap');
+
+/* =========================================
+   2. TAILWIND CSS
+   ========================================= */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================
+   3. VARIABLES CSS (Thème EURL ROMAISA LIRAY)
+   ========================================= */
+:root {
+  --navy: #031b50;
+  --blue: #075bd8;
+  --light-blue: #0789fb;
+  --accent-blue: #71b4ff;
+  --pale: #f4f7fc;
+  --ink: #101521;
+  --text-muted: #3a4659;
+  --border-light: #dfe5ee;
+}
+
+/* =========================================
+   4. RESET & BASE
+   ========================================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: var(--ink);
+  font-family: 'DM Sans', Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Décalage pour le scroll vers les ancres (compense le header sticky) */
+section {
+  scroll-margin-top: 80px;
+}
+
+/* =========================================
+   5. UTILITAIRES PERSONNALISÉS
+   ========================================= */
+
+/* Masquer la barre de défilement (utilisé pour le menu admin mobile) */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Style par défaut pour les titres de section (si non géré par Tailwind) */
+.section-title {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  color: var(--navy);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+/* =========================================
+   6. STYLES SPÉCIFIQUES ADMIN (Optionnel)
+   ========================================= */
+.admin-layout {
+  background-color: var(--pale);
+  min-height: 100vh;
+}
+
+/* Animation de chargement douce */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.4s ease-out forwards;
+}

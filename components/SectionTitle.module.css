@@ -1,0 +1,41 @@
+.sectionTitle {
+  margin-bottom: 29px;
+}
+
+.title {
+  color: var(--navy);
+  font-size: clamp(48px, 5.2vw, 82px);
+  line-height: .9;
+  margin: 0;
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  text-transform: uppercase;
+}
+
+.titleLight {
+  color: #fff;
+}
+
+.titleRule {
+  display: block;
+  width: 105px;
+  height: 4px;
+  background: #0b54bc;
+  margin-top: 20px;
+}
+
+.ruleLight {
+  background: #54a5ff;
+}
+
+.eyebrow {
+  color: #1465d8;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: .22em;
+  margin: 0 0 10px;
+}
+
+.eyebrowLight {
+  color: #71b4ff;
+}

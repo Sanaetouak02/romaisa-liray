@@ -1,0 +1,381 @@
+.referencesSection {
+  padding: 60px clamp(20px, 4vw, 60px);
+  background: #ffffff;
+}
+
+/* Header aligné comme les autres sections */
+.headerWrapper {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.logoWrapper {
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.titleWrapper {
+  flex: 1;
+}
+
+/* Cartes de section */
+.sectionCard {
+  background: #ffffff;
+  border-radius: 16px;
+  border: 2px solid #e8eef5;
+  padding: 30px;
+  margin-bottom: 30px;
+  box-shadow: 0 4px 20px rgba(3, 27, 80, 0.08);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 3px solid #075bd8;
+}
+
+.sectionIcon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #0789fb 0%, #031b50 100%);
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 4px 12px rgba(7, 91, 216, 0.3);
+}
+
+.sectionIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.sectionTitle {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 28px;
+  color: #031b50;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+/* Tableau des clients */
+.tableContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 50px 220px 1fr;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 20px 0;
+  border-bottom: 1px solid #dfe5ee;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableIcon {
+  width: 48px;
+  height: 48px;
+  background: linear-gradient(135deg, #0789fb 0%, #031b50 100%);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  box-shadow: 0 3px 10px rgba(7, 91, 216, 0.3);
+}
+
+.tableIcon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.tableCell {
+  flex-shrink: 0;
+}
+
+.clientName {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 20px;
+  color: #031b50;
+  text-transform: uppercase;
+  margin: 0;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.tableDescription {
+  flex: 1;
+}
+
+.clientWorks {
+  margin: 0;
+  padding-left: 0;
+  list-style: none;
+}
+
+.clientWorks li {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #3a4659;
+  margin-bottom: 6px;
+  position: relative;
+  padding-left: 16px;
+}
+
+.clientWorks li::before {
+  content: '•';
+  position: absolute;
+  left: 0;
+  color: #075bd8;
+  font-weight: bold;
+}
+
+/* Footer bleu */
+.referencesFooter {
+  border-top: 3px solid #0789fb;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+}
+
+.footerPillars {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px 30px;
+}
+
+.footerPillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 20px;
+  border-right: 1px solid rgba(113, 180, 255, 0.25);
+  transition: all 0.3s ease;
+}
+
+.footerPillar:last-child {
+  border-right: none;
+}
+
+.footerPillar:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateY(-3px);
+}
+
+.footerIcon {
+  width: 56px;
+  height: 56px;
+  display: grid;
+  place-items: center;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+}
+
+.footerIcon svg {
+  width: 48px;
+  height: 48px;
+}
+
+.footerLabel {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.footerBottom {
+  position: relative;
+  padding: 20px;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.footerLine {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  margin-bottom: 15px;
+}
+
+.footerText {
+  text-align: center;
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+.pageNumber {
+  position: absolute;
+  bottom: 20px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  background: linear-gradient(135deg, #0789fb 0%, #075bd8 100%);
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+  font-size: 24px;
+  font-weight: 800;
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  box-shadow: 0 4px 15px rgba(7, 91, 216, 0.4);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .headerWrapper {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  .logoWrapper {
+    align-self: flex-start;
+  }
+
+  .titleWrapper {
+    width: 100%;
+  }
+
+  .sectionCard {
+    padding: 20px;
+  }
+
+  .sectionTitle {
+    font-size: 22px;
+  }
+
+  .tableRow {
+    grid-template-columns: 45px 180px 1fr;
+    gap: 15px;
+  }
+
+  .clientName {
+    font-size: 16px;
+  }
+
+  .footerPillars {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px 20px 20px;
+  }
+
+  .footerPillar:nth-child(2) {
+    border-right: none;
+  }
+
+  .footerPillar:nth-child(3) {
+    border-right: 1px solid rgba(113, 180, 255, 0.25);
+  }
+
+  .pageNumber {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 530px) {
+  .referencesSection {
+    padding: 40px 15px;
+  }
+
+  .headerWrapper {
+    gap: 15px;
+  }
+
+  .logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .sectionTitle {
+    font-size: 18px;
+  }
+
+  .tableRow {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    padding: 16px 0;
+  }
+
+  .tableIcon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .tableIcon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  .clientName {
+    font-size: 16px;
+  }
+
+  .clientWorks li {
+    font-size: 13px;
+  }
+
+  .footerPillars {
+    grid-template-columns: 1fr;
+    padding: 25px 15px 15px;
+  }
+
+  .footerPillar {
+    border-right: none !important;
+    border-bottom: 1px solid rgba(113, 180, 255, 0.15);
+    flex-direction: row;
+    justify-content: flex-start;
+    padding: 16px 10px;
+    gap: 16px;
+  }
+
+  .footerIcon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+  }
+
+  .footerIcon svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  .footerLabel {
+    text-align: left;
+    font-size: 12px;
+  }
+
+  .pageNumber {
+    bottom: 15px;
+    right: 15px;
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+}

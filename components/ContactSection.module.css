@@ -1,0 +1,189 @@
+.contactSection {
+  padding: 80px clamp(20px, 4vw, 80px);
+  /* Background dégradé bleu professionnel */
+  background: linear-gradient(135deg, #031b50 0%, #075bd8 50%, #0789fb 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Effet de motif subtil en arrière-plan */
+.contactSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(113, 180, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(7, 137, 251, 0.15) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.contactContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.leadText {
+  font-size: 18px;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.95);
+  max-width: 700px;
+  margin: 0 0 50px 0;
+}
+
+/* Grille des cartes de contact */
+.contactGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+  margin-bottom: 50px;
+}
+
+.contactCard {
+  background: rgba(255, 255, 255, 0.98);
+  border: 2px solid rgba(113, 180, 255, 0.3);
+  border-radius: 16px;
+  padding: 30px 25px;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.contactCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.25);
+  border-color: rgba(113, 180, 255, 0.6);
+  background: #ffffff;
+}
+
+.cardIcon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 20px;
+}
+
+.cardIcon svg {
+  width: 100%;
+  height: 100%;
+}
+
+.cardTitle {
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  font-size: 22px;
+  color: #031b50;
+  text-transform: uppercase;
+  margin: 0 0 15px 0;
+  letter-spacing: 0.02em;
+}
+
+.cardContent {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #3a4659;
+}
+
+.cardContent a {
+  color: #075bd8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.cardContent a:hover {
+  color: #031b50;
+}
+
+/* Numéros de téléphone */
+.phoneNumbers {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.phoneButton {
+  background: none;
+  border: none;
+  color: #075bd8;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  font-family: inherit;
+}
+
+.phoneButton:hover {
+  color: #031b50;
+  transform: translateX(3px);
+}
+
+/* Bouton CTA principal */
+.ctaContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  color: #075bd8;
+  padding: 18px 40px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-family: 'DM Sans', Arial, sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.ctaButton:hover {
+  background: #f8fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .contactGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 530px) {
+  .contactSection {
+    padding: 50px 20px;
+  }
+  
+  .contactGrid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .contactCard {
+    padding: 25px 20px;
+  }
+  
+  .cardIcon {
+    width: 56px;
+    height: 56px;
+  }
+  
+  .cardTitle {
+    font-size: 20px;
+  }
+  
+  .ctaButton {
+    width: 100%;
+    padding: 16px 20px;
+  }
+}
