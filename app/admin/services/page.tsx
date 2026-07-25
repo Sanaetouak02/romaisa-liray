@@ -15,6 +15,43 @@ export default function AdminServicesPage() {
     load()
   }, [])
 
+  async function uploadFileDataURL(filename: string, dataURL: string) {
+    try {
+      const res = await fetch('/api/admin/upload', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ filename, data: dataURL }) })
+      if (!res.ok) throw new Error('Upload failed')
+      const json = await res.json()
+      return json.url as string
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error('Upload error', err)
+      return null
+    }
+  }
+
+  async function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = async () => {
+      const dataURL = String(reader.result || '')
+      const url = await uploadFileDataURL(file.name, dataURL)
+      if (url) setForm({ ...form, image: url })
+    }
+    reader.readAsDataURL(file)
+  }
+
+  async function handleEditFileChange(e: React.ChangeEvent<HTMLInputElement>, setter: React.Dispatch<React.SetStateAction<Partial<Service>>>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+    const reader = new FileReader()
+    reader.onload = async () => {
+      const dataURL = String(reader.result || '')
+      const url = await uploadFileDataURL(file.name, dataURL)
+      if (url) setter((prev: Partial<Service>) => ({ ...(prev as Partial<Service>), image: url }))
+    }
+    reader.readAsDataURL(file)
+  }
+
   async function load() {
     setLoading(true)
     const res = await fetch('/api/admin/services', { credentials: 'include' })
@@ -88,6 +125,18 @@ export default function AdminServicesPage() {
             </select>
           </div>
         </div>
+        <div className="mt-3 grid gap-3 md:grid-cols-2 items-start">
+          <div>
+            <label className="mb-1 block text-sm font-medium text-indigo-100">Image (optionnelle)</label>
+            <input type="file" accept="image/*" onChange={handleFileChange} className="w-full text-sm text-slate-900" />
+            {form.image ? (
+              <div className="mt-2">
+                <p className="text-xs text-indigo-200">Aperçu :</p>
+                <img src={form.image} alt="Aperçu" className="mt-1 max-h-40 rounded-lg border" />
+              </div>
+            ) : null}
+          </div>
+        </div>
         <div className="mt-3">
           <label className="mb-1 block text-sm font-medium text-indigo-100">Description</label>
           <textarea value={form.description || ''} onChange={(e) => setForm({ ...form, description: e.target.value })} className="min-h-[80px] w-full rounded-2xl border border-white/20 bg-white/90 px-3 py-2.5 text-sm text-slate-900" />
@@ -115,8 +164,13 @@ export default function AdminServicesPage() {
                   </select>
                 </div>
                 <textarea value={draft.description || ''} onChange={(e) => setDraft({ ...draft, description: e.target.value })} className="min-h-[80px] w-full rounded-2xl border border-white/20 bg-white/90 px-3 py-2.5 text-sm text-slate-900" />
+                <div>
+                  <label className="mb-1 block text-sm font-medium text-indigo-100">Image (optionnelle)</label>
+                  <input type="file" accept="image/*" onChange={(e) => handleEditFileChange(e, setDraft)} className="w-full text-sm text-slate-900" />
+                  {draft.image ? (<img src={draft.image} alt="Aperçu" className="mt-2 max-h-36 rounded-lg border" />) : null}
+                </div>
                 <div className="flex gap-3">
-                  <button onClick={() => update({ ...(s as Service), number: draft.number || s.number, title: draft.title || s.title, description: draft.description || s.description, icon: draft.icon || s.icon })} className="rounded-2xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900">Enregistrer</button>
+                  <button onClick={() => update({ ...(s as Service), number: draft.number || s.number, title: draft.title || s.title, description: draft.description || s.description, icon: draft.icon || s.icon, image: draft.image || s.image })} className="rounded-2xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900">Enregistrer</button>
                   <button onClick={() => { setEditingId(null); setDraft({}) }} className="rounded-2xl border border-white/20 bg-white/10 px-4 py-2.5 text-sm font-semibold text-white">Annuler</button>
                 </div>
               </div>
@@ -126,9 +180,10 @@ export default function AdminServicesPage() {
                   <div className="mb-2 text-sm text-indigo-100">#{s.number}</div>
                   <h3 className="text-lg font-semibold">{s.title}</h3>
                   <p className="mt-1 text-sm text-indigo-100">{s.description}</p>
+                  {s.image ? (<img src={s.image} alt={s.title} className="mt-2 max-h-28 rounded" />) : null}
                 </div>
                 <div className="flex gap-2">
-                  <button onClick={() => { setEditingId(s.id ?? null); setDraft({ number: s.number, title: s.title, description: s.description, icon: s.icon }) }} className="rounded-2xl border border-white/20 bg-white/10 px-3 py-2 text-sm font-semibold text-white">Modifier</button>
+                  <button onClick={() => { setEditingId(s.id ?? null); setDraft({ number: s.number, title: s.title, description: s.description, icon: s.icon, image: s.image }) }} className="rounded-2xl border border-white/20 bg-white/10 px-3 py-2 text-sm font-semibold text-white">Modifier</button>
                   <button onClick={() => remove(s.id)} className="rounded-2xl border border-rose-300/30 bg-rose-500/15 px-3 py-2 text-sm font-semibold text-rose-100">Supprimer</button>
                 </div>
               </div>

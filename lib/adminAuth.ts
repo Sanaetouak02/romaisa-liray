@@ -1,4 +1,3 @@
-import crypto from 'crypto'
 import prisma from './prisma'
 
 const COOKIE_NAME = 'rl_admin'
@@ -6,16 +5,33 @@ const SESSION_SECRET = process.env.ADMIN_SESSION_SECRET || 'change-me-to-a-secur
 // Session max age in seconds (default 1 year). Increase if you want longer persistent logins.
 const SESSION_MAX_AGE = 60 * 60 * 24 * 365
 
-function sign(value: string) {
-  return crypto.createHmac('sha256', SESSION_SECRET).update(value).digest('hex')
+async function sign(value: string) {
+  const encoder = new TextEncoder()
+  const data = encoder.encode(value)
+  const keyData = encoder.encode(SESSION_SECRET)
+
+  if (typeof globalThis.crypto?.subtle !== 'undefined') {
+    const key = await globalThis.crypto.subtle.importKey(
+      'raw',
+      keyData,
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['sign'],
+    )
+    const signature = await globalThis.crypto.subtle.sign('HMAC', key, data)
+    return Array.from(new Uint8Array(signature)).map((byte) => byte.toString(16).padStart(2, '0')).join('')
+  }
+
+  const { createHmac } = await import('crypto')
+  return createHmac('sha256', SESSION_SECRET).update(value).digest('hex')
 }
 
-export function createAdminToken(userId: number) {
+export async function createAdminToken(userId: number) {
   const payload = `${userId}.${Date.now()}`
-  return `${payload}.${sign(payload)}`
+  return `${payload}.${await sign(payload)}`
 }
 
-export function verifyAdminToken(token: string | null | undefined) {
+export async function verifyAdminToken(token: string | null | undefined) {
   if (!token) {
     return null
   }
@@ -27,7 +43,7 @@ export function verifyAdminToken(token: string | null | undefined) {
   }
 
   const payload = `${userId}.${timestamp}`
-  if (sign(payload) !== signature) {
+  if ((await sign(payload)) !== signature) {
     return null
   }
 
@@ -59,7 +75,7 @@ export async function getAdminUserFromRequest(request: Request) {
   }
 
   const token = decodeURIComponent(authCookie.split('=')[1] || '')
-  const userId = verifyAdminToken(token)
+  const userId = await verifyAdminToken(token)
   if (!userId) {
     return null
   }

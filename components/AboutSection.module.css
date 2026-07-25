@@ -27,8 +27,8 @@
 
 .aboutGrid p:not(.lead) {
   max-width: 680px;
-  font-size: 17px;
-  line-height: 1.75;
+  font-size: 18px;
+  line-height: 1.85;
   color: #3a4659;
   margin-bottom: 16px;
 }
@@ -89,28 +89,19 @@
   flex-direction: column;
   align-items: center;
   text-align: center;
-  padding: 0 10px;
-  border-right: 1px solid #dfe5ee;
+  padding: 24px 20px;
+  min-height: auto;
+  background: #f4f7fc;
+  border-radius: 28px;
+  border: 1px solid rgba(7, 91, 216, 0.12);
+  box-shadow: 0 10px 26px rgba(7, 91, 216, 0.08);
 }
 
-.valueCard:last-child {
-  border-right: none;
-}
 
-.iconCircle {
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, #0789fb 0%, #031b50 100%);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  margin-bottom: 20px;
-  box-shadow: 0 4px 15px rgba(7, 91, 216, 0.3);
-}
-
-.iconCircle svg {
-  width: 48px;
-  height: 48px;
+.valueImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .valueTitle {
@@ -143,8 +134,8 @@
 }
 
 .valueText {
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.8;
   color: #3a4659;
   margin: 0;
 }

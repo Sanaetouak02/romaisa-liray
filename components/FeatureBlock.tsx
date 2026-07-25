@@ -12,7 +12,7 @@ export default function FeatureBlock({
       <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary text-white">{icon}</div>
       <div>
         <h3 className="text-xl font-semibold text-darkGray">{title}</h3>
-        <p className="mt-3 text-sm leading-7 text-gray-600">{text}</p>
+        <p className="mt-3 text-base leading-7 text-gray-600">{text}</p>
       </div>
     </div>
   )

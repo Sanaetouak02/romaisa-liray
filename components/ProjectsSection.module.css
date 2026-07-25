@@ -36,12 +36,24 @@
 }
 
 .projectIcon {
-  width: 64px;
-  height: 64px;
+  width: 140px;
+  height: 140px;
   flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #e8f0ff 0%, #f7fbff 100%);
+  border-radius: 28px;
+  padding: 16px;
+  box-shadow: 0 12px 30px rgba(7, 91, 216, 0.12);
 }
 
-.projectIcon svg {
+.projectIcon svg,
+.projectIcon .react-icons {
+  width: 100%;
+  height: 100%;
+}
+
+.projectIconSvg {
   width: 100%;
   height: 100%;
 }
@@ -57,8 +69,8 @@
 }
 
 .projectDescription {
-  font-size: 14px;
-  line-height: 1.6;
+  font-size: 17px;
+  line-height: 1.9;
   color: #3a4659;
   margin: 0;
   flex: 1;
@@ -127,32 +139,38 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 10px;
-  padding: 18px 16px;
-  min-height: 160px;
+  gap: 12px;
+  padding: 22px 18px;
+  min-height: 210px;
   width: 100%;
   min-width: 0;
-  background: #f8fafc;
-  border-radius: 12px;
-  border: 2px solid #e8eef5;
+  background: #f2f8ff;
+  border-radius: 18px;
+  border: 1px solid rgba(3, 27, 80, 0.08);
   transition: all 0.3s ease;
 }
 
 .clientCard:hover {
-  background: #e8eef5;
+  background: #e8efff;
   transform: translateY(-3px);
-  box-shadow: 0 4px 12px rgba(3, 27, 80, 0.1);
+  box-shadow: 0 12px 22px rgba(7, 91, 216, 0.14);
 }
 
 .clientLogo {
-  width: 92px;
-  height: 92px;
+  width: 110px;
+  height: 110px;
   background: #ffffff;
-  border-radius: 14px;
+  border-radius: 18px;
   display: grid;
   place-items: center;
-  padding: 12px;
-  box-shadow: 0 4px 12px rgba(3, 27, 80, 0.1);
+  padding: 14px;
+  box-shadow: 0 14px 24px rgba(7, 91, 216, 0.12);
+}
+
+.clientLogoImage {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .clientLogoImage {
@@ -162,12 +180,12 @@
 }
 
 .clientName {
-  font-size: 13px;
+  font-size: 15px;
   color: #3a4659;
   text-align: center;
   font-weight: 700;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.45;
 }
 
 .clientsControls {
@@ -395,7 +413,12 @@
   }
 
   .projectDescription {
-    font-size: 13px;
+    font-size: 16px;
+    line-height: 1.9;
+  }
+
+  .clientName {
+    font-size: 15px;
   }
 
   .projectImageWrapper {
@@ -422,7 +445,7 @@
   }
 
   .clientName {
-    font-size: 11px;
+    font-size: 15px;
   }
 
   .footerPillars {
@@ -452,7 +475,7 @@
 
   .footerLabel {
     text-align: left;
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .pageNumber {

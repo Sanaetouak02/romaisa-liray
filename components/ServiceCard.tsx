@@ -16,7 +16,7 @@ export default function ServiceCard({
       </div>
       <div>
         <h3 className="text-xl font-bold text-darkGray">{title}</h3>
-        <p className="mt-3 text-sm leading-7 text-gray-600">{description}</p>
+        <p className="mt-3 text-base leading-7 text-gray-600">{description}</p>
       </div>
     </div>
   )

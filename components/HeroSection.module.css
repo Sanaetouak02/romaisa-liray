@@ -1,6 +1,8 @@
 /* --- CONFIGURATION GLOBALE --- */
 .hero {
   position: relative;
+  width: 100vw;
+  max-width: 100vw;
   min-height: 100vh;
   overflow: hidden;
   color: #ffffff;
@@ -8,7 +10,24 @@
   align-items: center;
   justify-content: center;
   font-family: 'DM Sans', Arial, sans-serif;
-  padding-bottom: 80px; /* Espace supplémentaire en bas */
+  padding-bottom: 0;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+}
+
+.heroPanel {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin: 0;
+  display: grid;
+  gap: 30px;
+  padding: 0;
+  background: transparent;
+  border-radius: 0;
+  box-shadow: none;
+  z-index: 2;
+  overflow: hidden;
 }
 
 .heroImage {
@@ -16,20 +35,16 @@
   object-position: center;
 }
 
-/* Overlay avec effet ovale blanc au centre */
+/* Overlay avec effet ovale transparent au centre */
 .heroShade {
   position: absolute;
   inset: 0;
-  background: linear-gradient(90deg, 
-    rgba(3, 27, 80, 0.4) 0%, 
-    rgba(3, 27, 80, 0.2) 25%, 
-    rgba(255, 255, 255, 0.85) 40%, 
-    rgba(255, 255, 255, 0.95) 50%, 
-    rgba(255, 255, 255, 0.85) 60%, 
-    rgba(3, 27, 80, 0.2) 75%, 
-    rgba(3, 27, 80, 0.4) 100%
+  background: radial-gradient(circle at center, 
+    rgba(255, 255, 255, 0.28) 0%, 
+    rgba(255, 255, 255, 0.12) 30%, 
+    rgba(3, 27, 80, 0.45) 70%, 
+    rgba(3, 27, 80, 0.85) 100%
   );
-  z-index: 1;
 }
 
 /* Forme ovale blanche ajustée pour laisser plus d'image en bas */
@@ -54,7 +69,7 @@
 .heroContent {
   position: relative;
   z-index: 2;
-  width: min(900px, 90vw);
+  width: 100%;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
@@ -62,6 +77,26 @@
   align-items: center;
   gap: 16px;
   margin-bottom: 40px; /* Espace supplémentaire après les boutons */
+}
+
+.heroCentered {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.heroFooter {
+  position: relative;
+  display: grid;
+  gap: 14px;
+  padding: 18px 0 0;
+  width: 100%;
+  background: rgba(3, 27, 80, 0.92);
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
 }
 
 .heroLogoWrapper {
@@ -91,7 +126,7 @@
   color: #031b50;
   text-transform: uppercase;
   font-weight: 700;
-  font-size: 13px;
+  font-size: 15px;
   letter-spacing: 0.4em;
   margin: 0;
 }
@@ -116,12 +151,21 @@
   text-transform: uppercase;
   letter-spacing: 0.02em;
   text-align: center;
+  max-width: 920px;
+  color: #ffffff;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-/* TRAVAUX D'ASSAINISSEMENT en bleu nuit foncé */
-.heroMainTitle {
-  color: #031b50;
-  text-shadow: 0 4px 20px rgba(3, 27, 80, 0.3);
+/* ET HYDRAULIQUE en gris métallique/argent */
+.heroTitleHighlight {
+  display: block;
+  background: linear-gradient(180deg, #c0c0c0 0%, #808080 40%, #606060 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+  margin-top: 5px;
+  font-weight: 700;
 }
 
 /* ET HYDRAULIQUE en gris métallique/argent */
@@ -139,13 +183,13 @@
 /* EXPERTISE • QUALITÉ... en noir */
 .heroValues {
   color: #000000;
-  font-size: 15px;
-  font-weight: 800;
-  letter-spacing: 0.25em;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.32em;
   text-transform: uppercase;
   margin: 0 0 35px;
   text-align: center;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
 }
 
 /* --- BOUTONS --- */
@@ -164,15 +208,8 @@
   align-items: center;
   text-transform: uppercase;
   letter-spacing: 0.12em;
-  font-size: 12px;
-  font-weight: 700;
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 6px;
-  text-decoration: none;
-  cursor: pointer;
-  min-width: 180px;
+  font-size: 15px;
 }
-
 .buttonBlue {
   background: linear-gradient(135deg, #0789fb 0%, #075bd8 100%);
   color: #ffffff;
@@ -258,12 +295,89 @@
   }
 
   .heroValues {
-    font-size: 11px;
+    font-size: 15px;
     letter-spacing: 0.15em;
   }
 
   .button {
     width: 100%;
     min-width: unset;
+    font-size: 15px;
+  }
+}
+
+.heroFooter {
+
+  background-color: #031c3f;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: none;
+  padding: 20px 0 50px;
+}
+
+.footerPillars {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 24px;
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+}
+
+.footerPillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  min-height: 180px;
+  padding: 12px 10px;
+  background: transparent;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
+  text-align: center;
+}
+
+.footerIcon {
+  width: 220px;
+  height: 220px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.footerLabel {
+  color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-align: center;
+  max-width: 100%;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+@media (max-width: 900px) {
+  .heroFooter {
+    padding: 30px 0 35px;
+  }
+
+  .footerPillars {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 530px) {
+  .footerPillars {
+    grid-template-columns: 1fr;
+    padding: 0 15px;
+  }
+
+  .footerPillar {
+    min-height: 120px;
+    padding: 18px 12px;
   }
 }

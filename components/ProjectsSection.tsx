@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import { FiUsers } from 'react-icons/fi'
 import SectionTitle from './SectionTitle'
 import styles from './ProjectsSection.module.css'
 import heroImage from '../images/hero-background.png'
@@ -30,62 +31,6 @@ export default async function ProjectsSection({ projectsPage, clientsPage }: { p
   const totalProjects = projects.length || 0
   const totalClients = clients.length || 0
 
-function ProjectIcon({ name }: { name: string }) {
-  if (name === 'pompage' || name.toLowerCase() === 'pompage') {
-    return (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="18" fill="#075bd8"/>
-        <path d="M18 28v-8a6 6 0 1112 0v8" stroke="#ffffff" strokeWidth="3" strokeLinecap="round"/>
-        <rect x="20" y="28" width="8" height="6" fill="#ffffff"/>
-        <path d="M16 34h16" stroke="#ffffff" strokeWidth="2" strokeLinecap="round"/>
-      </svg>
-    )
-  }
-  if (name === 'network') {
-    return (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="18" fill="#075bd8"/>
-        <path d="M16 24h16M24 16v16" stroke="#ffffff" strokeWidth="3" strokeLinecap="round"/>
-        <circle cx="24" cy="24" r="4" fill="#ffffff"/>
-      </svg>
-    )
-  }
-  if (name === 'water') {
-    return (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="18" fill="#075bd8"/>
-        <path d="M24 16c-4 5-7 9-7 13a7 7 0 1014 0c0-4-3-8-7-13z" fill="#ffffff"/>
-      </svg>
-    )
-  }
-  if (name === 'industrial') {
-    return (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="18" fill="#075bd8"/>
-        <path d="M24 16l3 2 4-1 2 3 4 .5 .5 4 3 1.5-.5 4 2.5 2-1.5 3 1 4-3.5 1-1 3.5-4-1-2 3-3-1.5-3 1.5-2-3-4 1-1-3.5-3.5-1 1-4-2.5-2 .5-4 3-1.5.5-4 4-.5 2-3 4 1z" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        <circle cx="24" cy="24" r="6" fill="#ffffff"/>
-      </svg>
-    )
-  }
-  if (name === 'maintenance') {
-    return (
-      <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="24" cy="24" r="18" fill="#075bd8"/>
-        <path d="M18 30l12-12M30 30L18 18" stroke="#ffffff" strokeWidth="3" strokeLinecap="round"/>
-        <circle cx="18" cy="18" r="4" stroke="#ffffff" strokeWidth="2"/>
-        <circle cx="30" cy="30" r="4" stroke="#ffffff" strokeWidth="2"/>
-      </svg>
-    )
-  }
-  return (
-    <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="24" cy="24" r="18" fill="#075bd8"/>
-      <path d="M18 24c0-4 3-7 6-7s6 3 6 7v6H18v-6z" fill="#ffffff"/>
-      <rect x="16" y="30" width="16" height="4" rx="1" fill="#ffffff"/>
-    </svg>
-  )
-}
-
   return (
     <section id="realisations" className={styles.projectsSection}>
       {/* Header avec SectionTitle comme les autres sections */}
@@ -94,18 +39,13 @@ function ProjectIcon({ name }: { name: string }) {
         title="GALERIE DE RÉALISATIONS" 
       />
 
-      <p className="text-sm text-indigo-100">{`Nombre de réalisations trouvées : ${totalProjects}`}</p>
+      <p className="text-base text-slate-600">{`Nombre de réalisations trouvées : ${totalProjects}`}</p>
 
       {/* Grille des projets */}
       <div className={styles.projectsGrid}>
         {pageProjects.map((project) => (
           <article className={styles.projectCard} key={project.id ?? project.title}>
-            <div className={styles.cardHeader}>
-              <div className={styles.projectIcon}>
-                <ProjectIcon name={project.category ?? 'default'} />
-              </div>
               <h3 className={styles.projectTitle}>{project.title}</h3>
-            </div>
             <p className={styles.projectDescription}>{project.description}</p>
             <div className={styles.projectImageWrapper}>
               {project.image ? (
@@ -148,11 +88,7 @@ function ProjectIcon({ name }: { name: string }) {
       <div className={styles.clientsSection}>
         <div className={styles.clientsHeader}>
           <div className={styles.clientsIcon}>
-            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 10l3 2 5-1 2 4 4 .5 .5 4 3 1.5-.5 4 2.5 2-1.5 3 1 4-3.5 1-1 3.5-4-1-2 3-3-1.5-3 1.5-2-3-4 1-1-3.5-3.5-1 1-4-2.5-2 .5-4 3-1.5.5-4 4-.5 2-3 4 1z" fill="#075bd8"/>
-              <circle cx="20" cy="20" r="8" fill="#ffffff"/>
-              <path d="M16 20h8M20 16v8" stroke="#075bd8" strokeWidth="2" strokeLinecap="round"/>
-            </svg>
+            <FiUsers size={44} color="#075bd8" />
           </div>
           <h3 className={styles.clientsTitle}>NOS CLIENTS</h3>
         </div>

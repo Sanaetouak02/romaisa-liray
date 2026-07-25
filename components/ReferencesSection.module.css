@@ -45,13 +45,13 @@
 }
 
 .sectionIcon {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   background: linear-gradient(135deg, #0789fb 0%, #031b50 100%);
   border-radius: 50%;
   display: grid;
   place-items: center;
-  box-shadow: 0 4px 12px rgba(7, 91, 216, 0.3);
+  box-shadow: 0 4px 14px rgba(7, 91, 216, 0.35);
 }
 
 .sectionIcon svg {
@@ -61,7 +61,7 @@
 
 .sectionTitle {
   font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: 28px;
+  font-size: clamp(30px, 4vw, 36px);
   color: #031b50;
   text-transform: uppercase;
   margin: 0;
@@ -100,8 +100,8 @@
 }
 
 .tableIcon svg {
-  width: 32px;
-  height: 32px;
+  width: 28px;
+  height: 28px;
 }
 
 .tableCell {
@@ -110,7 +110,7 @@
 
 .clientName {
   font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: 20px;
+  font-size: 22px;
   color: #031b50;
   text-transform: uppercase;
   margin: 0;
@@ -122,6 +122,13 @@
   flex: 1;
 }
 
+.tableDescription p {
+  font-size: 17px;
+  line-height: 1.8;
+  color: #3a4659;
+  margin: 0;
+}
+
 .clientWorks {
   margin: 0;
   padding-left: 0;
@@ -129,8 +136,8 @@
 }
 
 .clientWorks li {
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.75;
   color: #3a4659;
   margin-bottom: 6px;
   position: relative;
@@ -194,7 +201,7 @@
 .footerLabel {
   color: #ffffff;
   text-transform: uppercase;
-  font-size: 11px;
+  font-size: 15px;
   font-weight: 700;
   letter-spacing: 0.08em;
   text-align: center;
@@ -338,7 +345,7 @@
   }
 
   .clientWorks li {
-    font-size: 13px;
+    font-size: 15px;
   }
 
   .footerPillars {
@@ -368,7 +375,7 @@
 
   .footerLabel {
     text-align: left;
-    font-size: 12px;
+    font-size: 15px;
   }
 
   .pageNumber {

@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
 // Assurez-vous que le chemin vers votre logo est correct
@@ -12,6 +12,27 @@ export default function AdminLoginPage() {
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
+
+  useEffect(() => {
+    let active = true
+
+    async function checkSession() {
+      try {
+        const res = await fetch('/api/admin/me', { credentials: 'include' })
+        if (!active) return
+        if (res.ok) {
+          router.replace('/admin/dashboard')
+        }
+      } catch (err) {
+        // Ignore errors, user is not logged in
+      }
+    }
+
+    checkSession()
+    return () => {
+      active = false
+    }
+  }, [router])
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()

@@ -2,6 +2,10 @@ import Image from 'next/image'
 import SectionTitle from './SectionTitle'
 import styles from './ContactSection.module.css'
 import prisma from '../lib/prisma'
+import localisationIcon from '../images/localisation.svg'
+import telephoneIcon from '../images/telephone.svg'
+import mailIcon from '../images/mail.svg'
+import activiteIcon from '../images/activite.svg'
 
 export default async function ContactSection() {
   let contact: any = null
@@ -26,23 +30,15 @@ export default async function ContactSection() {
         <div className={styles.contactGrid}>
           <div className={styles.contactCard}>
             <div className={styles.cardIcon}>
-              <svg viewBox="0 0 40 40" fill="none">
-                <path d="M20 8c-6.6 0-12 5.4-12 12 0 9 12 20 12 20s12-11 12-20c0-6.6-5.4-12-12-12z" fill="#075bd8"/>
-                <circle cx="20" cy="20" r="5" fill="#ffffff"/>
-              </svg>
+              <Image src={localisationIcon} alt="Icône de localisation" className={styles.cardImage} width={160} height={160} />
             </div>
-            <h3 className={styles.cardTitle}>SIÈGE SOCIAL</h3>
             <div className={styles.cardContent}>{contact?.address || '—'}</div>
           </div>
 
           <div className={styles.contactCard}>
             <div className={styles.cardIcon}>
-              <svg viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="16" fill="#075bd8"/>
-                <path d="M26 28l-5-3-6 3 2-7-5-4 14-3z" fill="#ffffff"/>
-              </svg>
+              <Image src={telephoneIcon} alt="Icône de téléphone" className={styles.cardImage} width={160} height={160} />
             </div>
-            <h3 className={styles.cardTitle}>TÉLÉPHONE</h3>
             <div className={styles.cardContent}>
               <div className={styles.phoneNumbers}>
                 {phones.map((p: any) => (
@@ -54,24 +50,15 @@ export default async function ContactSection() {
 
           <div className={styles.contactCard}>
             <div className={styles.cardIcon}>
-              <svg viewBox="0 0 40 40" fill="none">
-                <rect x="4" y="10" width="32" height="20" rx="2" fill="#075bd8"/>
-                <path d="M4 14l16 10 16-10" fill="#ffffff"/>
-              </svg>
+              <Image src={mailIcon} alt="Icône de mail" className={styles.cardImage} width={160} height={160} />
             </div>
-            <h3 className={styles.cardTitle}>E-MAIL</h3>
             <div className={styles.cardContent}><a href={`mailto:${contact?.email || 'info@example.com'}`}>{contact?.email || '—'}</a></div>
           </div>
 
           <div className={styles.contactCard}>
             <div className={styles.cardIcon}>
-              <svg viewBox="0 0 40 40" fill="none">
-                <circle cx="20" cy="20" r="16" fill="#075bd8"/>
-                <path d="M14 26l4-6 4 3 4-6" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-                <rect x="10" y="24" width="8" height="4" fill="#ffffff"/>
-              </svg>
+              <Image src={activiteIcon} alt="Icône d'activité" className={styles.cardImage} width={160} height={160} />
             </div>
-            <h3 className={styles.cardTitle}>ACTIVITÉ</h3>
             <div className={styles.cardContent}>Travaux d'assainissement et d'hydraulique</div>
           </div>
         </div>

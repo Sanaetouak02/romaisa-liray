@@ -21,7 +21,7 @@ export async function POST(request: Request) {
   }
   if (!ok) return new Response(JSON.stringify({ error: 'Identifiants invalides.' }), { status: 401 })
 
-  const token = createAdminToken(user.id)
+  const token = await createAdminToken(user.id)
   const maxAge = getSessionMaxAge()
   const headers = new Headers({ 'Set-Cookie': `${getAdminCookieName()}=${encodeURIComponent(token)}; HttpOnly; Path=/; Max-Age=${maxAge}; SameSite=Lax` })
   return new Response(JSON.stringify({ ok: true }), { status: 200, headers })

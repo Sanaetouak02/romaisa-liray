@@ -67,8 +67,8 @@
 }
 
 .serviceDescription {
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 17px;
+  line-height: 1.9;
   color: #3a4659;
   margin: 0;
 }
@@ -76,258 +76,76 @@
 .serviceIconWrapper {
   display: grid;
   place-items: center;
-  padding: 20px;
-}
-
-.serviceIconWrapper svg {
-  width: 64px;
-  height: 64px;
-}
-
-/* --- FOOTER BLEU STYLE CATALOGUE --- */
-.servicesFooter {
-  border-top: 3px solid #0789fb;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
-}
-
-.footerPillars {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 40px 20px 30px;
-}
-
-.footerPillar {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 12px;
-  padding: 20px;
-  border-right: 1px solid rgba(113, 180, 255, 0.25);
-  transition: all 0.3s ease;
-}
-
-.footerPillar:last-child {
-  border-right: none;
-}
-
-.footerPillar:hover {
-  background: rgba(255, 255, 255, 0.1);
-  transform: translateY(-3px);
-}
-
-.footerIcon {
-  width: 56px;
-  height: 56px;
-  display: grid;
-  place-items: center;
-  /* Conservez ce filtre si vos SVG ont de la transparence pour un effet de profondeur */
-  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-}
-
-/* ✅ Cible à la fois les images Next.js et les SVG (fallback) */
-.footerImage,
-.footerIcon svg {
-  width: 48px;
-  height: 48px;
-  object-fit: contain;
-}
-
-.footerLabel {
-  color: #ffffff;
-  text-transform: uppercase;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-align: center;
-  line-height: 1.3;
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 900px) {
-  .serviceItem {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 25px 0;
-  }
-
-  .serviceImageWrapper {
-    height: 180px;
-    order: 1;
-  }
-
-  .serviceContent {
-    order: 2;
-  }
-
-  .serviceIconWrapper {
-    order: 3;
-    padding: 10px;
-  }
-
-  .serviceIconWrapper svg {
-    width: 48px;
-    height: 48px;
-  }
-
-  .serviceTitle {
-    font-size: 26px;
-  }
-
-  .footerPillars {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 30px 20px 20px;
-  }
-
-  .footerPillar:nth-child(2) {
-    border-right: none;
-  }
-
-  .footerPillar:nth-child(3) {
-    border-right: 1px solid rgba(113, 180, 255, 0.25);
-  }
-}
-
-@media (max-width: 530px) {
-  .servicesSection {
-    padding: 50px 20px;
-  }
-
-  .serviceImageWrapper {
-    height: 150px;
-  }
-
-  .serviceTitle {
-    font-size: 22px;
-  }
-
-  .serviceDescription {
-    font-size: 14px;
-  }
-
-  .serviceIconWrapper svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  .footerPillars {
-    grid-template-columns: 1fr;
-    padding: 25px 15px 15px;
-  }
-
-  .footerPillar {
-    border-right: none !important;
-    border-bottom: 1px solid rgba(113, 180, 255, 0.15);
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 16px 10px;
-    gap: 16px;
-  }
-
-  .footerIcon {
-    width: 48px;
-    height: 48px;
-    flex-shrink: 0;
-  }
-
-  .footerImage,
-  .footerIcon svg {
-    width: 40px;
-    height: 40px;
-  }
-
-  .footerLabel {
-    text-align: left;
-    font-size: 12px;
-  }
-}
-.serviceImageWrapper {
-  position: relative; /* Obligatoire pour que l'attribut "fill" de next/image fonctionne */
-  width: 100%;
-  height: 100%; /* Ajustez selon votre design */
-  overflow: hidden;
-  border-radius: 8px; /* Optionnel */
-}
-
-.serviceImage {
-  object-fit: cover;
+  padding: 12px;
+  background: transparent;
+  border-radius: 0;
+  min-width: 220px;
 }
 
 .serviceIcon {
-  width: 48px;
-  height: 48px;
-  /* Vous pouvez ajouter transition: fill 0.3s ease; ici si vous voulez un effet au survol */
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
 }
-/* --- FOOTER BLEU STYLE CATALOGUE (SVG Zoomés) --- */
+
+.serviceIconWrapper img {
+  width: 220px;
+  height: 220px;
+  object-fit: contain;
+}
+
+/* --- FOOTER --- */
 .servicesFooter {
-  border-top: 3px solid #0789fb;
-  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+  border-top: 3px solid rgba(7, 91, 216, 0.8);
+  background-color: #031c3f;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-shadow: none;
 }
 
 .footerPillars {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
   max-width: 1200px;
   margin: 0 auto;
-  padding: 40px 20px 30px;
+  padding: 50px 20px 40px;
 }
 
 .footerPillar {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 16px; /* Espace augmenté pour accueillir le zoom */
-  padding: 20px;
-  border-right: 1px solid rgba(113, 180, 255, 0.25);
-  transition: background 0.3s ease;
-}
-
-.footerPillar:last-child {
-  border-right: none;
-}
-
-.footerPillar:hover {
-  background: rgba(255, 255, 255, 0.1);
+  justify-content: center;
+  gap: 20px;
+  min-height: 240px;
+  padding: 32px 24px;
+  background: rgba(7, 91, 216, 0.22);
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
 }
 
 .footerIcon {
-  width: 72px;  /* ⬆️ Augmenté (était 56px) */
-  height: 72px; /* ⬆️ Augmenté (était 56px) */
-  display: grid;
-  place-items: center;
-  filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Courbe de zoom fluide */
+  width: 180px;
+  height: 180px;
 }
 
-/* 🚀 Effet de zoom au survol de la colonne entière */
-.footerPillar:hover .footerIcon {
-  transform: scale(1.15); 
-}
-
-/* ✅ Cible à la fois les images Next.js et les balises SVG natives */
-.footerImage,
-.footerIcon svg {
-  width: 64px;  /* ⬆️ Augmenté (était 48px) */
-  height: 64px; /* ⬆️ Augmenté (était 48px) */
-  object-fit: contain;
-  transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* Petit zoom supplémentaire sur l'élément graphique au survol */
-.footerPillar:hover .footerImage,
-.footerPillar:hover svg {
-  transform: scale(1.1); 
+.footerImage {
+  width: 180px;
+  height: 180px;
 }
 
 .footerLabel {
   color: #ffffff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  font-size: 12px; /* Légèrement augmenté pour l'équilibre */
-  font-weight: 700;
-  letter-spacing: 0.08em;
   text-align: center;
-  line-height: 1.3;
+  max-width: 100%;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 
 /* --- RESPONSIVE --- */
@@ -353,8 +171,8 @@
   }
 
   .serviceIconWrapper svg {
-    width: 48px;
-    height: 48px;
+    width: 120px;
+    height: 120px;
   }
 
   .serviceTitle {
@@ -364,14 +182,6 @@
   .footerPillars {
     grid-template-columns: repeat(2, 1fr);
     padding: 30px 20px 20px;
-  }
-
-  .footerPillar:nth-child(2) {
-    border-right: none;
-  }
-
-  .footerPillar:nth-child(3) {
-    border-right: 1px solid rgba(113, 180, 255, 0.25);
   }
 }
 
@@ -393,8 +203,8 @@
   }
 
   .serviceIconWrapper svg {
-    width: 40px;
-    height: 40px;
+    width: 72px;
+    height: 72px;
   }
 
   .footerPillars {
@@ -403,28 +213,90 @@
   }
 
   .footerPillar {
+    min-height: 120px;
+    padding: 12px 10px;
+  }
+}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 900px) {
+  .serviceItem {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 25px 0;
+  }
+
+  .serviceImageWrapper {
+    height: 180px;
+    order: 1;
+  }
+
+  .serviceContent {
+    order: 2;
+  }
+
+  .serviceIconWrapper {
+    order: 3;
+    padding: 10px;
+  }
+
+  .serviceIconWrapper svg {
+    width: 120px;
+    height: 120px;
+  }
+
+  .serviceTitle {
+    font-size: 26px;
+  }
+
+  .footerPillars {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 30px 20px 20px;
+  }
+
+  .footerPillar::before {
+    inset: 12% 10%;
+  }
+}
+
+@media (max-width: 530px) {
+  .servicesSection {
+    padding: 50px 20px;
+  }
+
+  .serviceImageWrapper {
+    height: 150px;
+  }
+
+  .serviceTitle {
+    font-size: 22px;
+  }
+
+  .serviceDescription {
+    font-size: 14px;
+  }
+
+  .serviceIconWrapper svg {
+    width: 72px;
+    height: 72px;
+  }
+
+  .footerPillars {
+    grid-template-columns: 1fr;
+    padding: 25px 15px 15px;
+  }
+
+  .footerPillar {
+    min-height: 120px;
+    padding: 12px 10px;
     border-right: none !important;
-    border-bottom: 1px solid rgba(113, 180, 255, 0.15);
-    flex-direction: row;
-    justify-content: flex-start;
-    padding: 16px 10px;
-    gap: 16px;
-  }
-
-  .footerIcon {
-    width: 48px; /* Taille adaptée pour mobile (évite que ce soit trop gros) */
-    height: 48px;
-    flex-shrink: 0;
-  }
-
-  .footerImage,
-  .footerIcon svg {
-    width: 40px; /* Taille adaptée pour mobile */
-    height: 40px;
+    border-bottom: 1px solid rgba(113, 180, 255, 0.12);
+    justify-items: start;
   }
 
   .footerLabel {
-    text-align: left;
-    font-size: 12px;
+    background: rgba(2,6,23,0.55);
+    color: #fff;
+    font-size: 15px;
   }
 }
