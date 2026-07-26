@@ -64,7 +64,7 @@ export default function AdminLoginPage() {
     <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 p-4 font-['DM_Sans']">
       
       {/* Carte unique et épurée */}
-      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100">
+      <div className="w-full max-w-md sm:max-w-2xl md:max-w-6xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100">
         
         {/* Section Gauche - Image de fond */}
         <div className="w-full md:flex md:w-7/12 p-6 md:p-10 flex-col justify-between relative overflow-hidden bg-slate-900 min-h-[240px]">
