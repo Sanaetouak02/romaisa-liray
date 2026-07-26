@@ -1,15 +1,16 @@
-"use client"
+'use client'
 
+import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter, usePathname } from 'next/navigation'
+import logoMark from '../images/Logo.svg'
 
 export default function AdminNav() {
   const router = useRouter()
   const pathname = usePathname()
 
-  // Hide the admin nav on the login page
-  if (!pathname) return null
-  if (pathname.startsWith('/admin/login')) return null
+  // Masquer la navigation sur la page de connexion
+  if (!pathname || pathname.startsWith('/admin/login')) return null
 
   async function handleLogout() {
     try {
@@ -27,7 +28,6 @@ export default function AdminNav() {
       label: 'Dashboard', 
       icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' 
     },
-    
     { 
       href: '/admin/projects', 
       label: 'Réalisations', 
@@ -51,89 +51,102 @@ export default function AdminNav() {
   ]
 
   return (
-    <nav className="bg-[#031b50] border-b border-[#075bd8]/30 shadow-lg sticky top-0 z-50 font-['DM_Sans']">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          
-          {/* Logo & Brand */}
-          <div className="flex items-center gap-3 flex-shrink-0">
-            <div className="bg-white/10 p-2 rounded-lg backdrop-blur-sm border border-white/10">
-              <svg className="w-5 h-5 text-[#71b4ff]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-              </svg>
+    <>
+      <div className="md:hidden fixed inset-x-0 top-0 z-50 border-b border-[#075bd8]/30 bg-[#031b50]/95 text-white shadow-xl">
+        <div className="mx-auto flex max-w-screen-xl flex-col gap-3 px-4 py-3">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="bg-white/10 p-3 rounded-3xl backdrop-blur-sm border border-white/10">
+                <Image src={logoMark} alt="Logo admin Romaïsa Liray" width={40} height={40} className="object-contain" />
+              </div>
+              <div>
+                <h1 className="text-lg font-semibold tracking-wide">ADMIN PANEL</h1>
+                <p className="text-[10px] uppercase tracking-[0.3em] text-[#71b4ff]">EURL ROMAISA LIRAY</p>
+              </div>
             </div>
-            <div className="hidden sm:block">
-              <h1 className="text-white font-['Bebas_Neue'] text-xl tracking-wider leading-none">
-                ADMIN PANEL
-              </h1>
-              <p className="text-[#71b4ff] text-[10px] font-bold tracking-widest uppercase">
-                EURL ROMAISA LIRAY
-              </p>
-            </div>
+            <button
+              onClick={handleLogout}
+              className="rounded-2xl border border-red-500/40 bg-red-600/90 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-red-600"
+            >
+              Déconnexion
+            </button>
           </div>
-
-          {/* Navigation Links (Desktop) */}
-          <div className="hidden md:flex items-center space-x-1">
+          <nav className="flex gap-2 overflow-x-auto pb-1">
             {links.map((l) => {
               const isActive = pathname === l.href
               return (
-                <Link 
-                  key={l.href} 
-                  href={l.href} 
-                  className={`flex items-center gap-2 px-3 py-2 rounded-md text-sm font-semibold transition-all duration-200 ${
-                    isActive 
-                      ? 'bg-[#075bd8] text-white shadow-md shadow-[#075bd8]/30' 
-                      : 'text-gray-300 hover:bg-white/10 hover:text-white'
+                <Link
+                  key={l.href}
+                  href={l.href}
+                  className={`flex min-w-[7.5rem] items-center gap-2 rounded-2xl border px-3 py-2 text-xs font-semibold transition-all duration-200 ${
+                    isActive
+                      ? 'border-[#075bd8] bg-[#075bd8] text-white'
+                      : 'border-white/10 bg-white/10 text-gray-200 hover:border-[#75abff]/50 hover:bg-white/15 hover:text-white'
                   }`}
                 >
-                  <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <svg className="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={l.icon} />
                   </svg>
-                  {l.label}
+                  <span className="truncate">{l.label}</span>
                 </Link>
               )
             })}
-          </div>
-
-          {/* Logout Button */}
-          <div className="flex items-center">
-            <button 
-              onClick={handleLogout} 
-              className="flex items-center gap-2 px-4 py-2 text-sm font-semibold text-white bg-red-600/90 hover:bg-red-600 rounded-md transition-all shadow-sm border border-red-500/50 hover:shadow-red-600/20"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
-              </svg>
-              <span className="hidden sm:inline">Déconnexion</span>
-            </button>
-          </div>
+          </nav>
         </div>
       </div>
 
-      {/* Mobile Navigation (Horizontal Scroll) */}
-      <div className="md:hidden border-t border-[#075bd8]/30 overflow-x-auto scrollbar-hide">
-        <div className="flex px-4 py-3 space-x-2 min-w-max">
+      <aside className="hidden md:flex fixed top-0 left-0 h-screen w-72 xl:w-80 bg-[#031b50] border-r border-[#075bd8]/30 shadow-xl z-50 flex flex-col justify-between font-['DM_Sans'] overflow-y-auto">
+      
+      {/* Partie supérieure : Logo & Liens */}
+      <div className="flex flex-col p-5">
+        
+        {/* En-tête / Branding */}
+        <div className="flex items-center gap-4 px-3 py-5 mb-7 border-b border-[#075bd8]/20">
+          <div className="bg-white/10 p-3 rounded-3xl backdrop-blur-sm border border-white/10">
+            <Image src={logoMark} alt="Logo admin Romaïsa Liray" width={40} height={40} className="object-contain" />
+            <h1 className="text-white text-2xl font-semibold tracking-wider">ADMIN PANEL</h1>
+            <p className="text-[#71b4ff] text-xs uppercase tracking-[0.35em] mt-1">EURL ROMAISA LIRAY</p>
+          </div>
+        </div>
+
+        {/* Liens de navigation */}
+        <nav className="flex flex-col gap-3">
           {links.map((l) => {
             const isActive = pathname === l.href
             return (
               <Link 
                 key={l.href} 
                 href={l.href} 
-                className={`flex items-center gap-2 px-3 py-2 rounded-md text-xs font-semibold whitespace-nowrap transition-all ${
+                className={`flex items-center gap-4 rounded-3xl px-5 py-4 text-base font-semibold transition-all duration-200 ${
                   isActive 
-                    ? 'bg-[#075bd8] text-white shadow-sm' 
-                    : 'text-gray-300 bg-white/5 border border-white/10'
+                    ? 'bg-[#075bd8] text-white shadow-[0_10px_30px_rgba(7,91,216,0.18)]' 
+                    : 'text-gray-300 hover:bg-white/10 hover:text-white'
                 }`}
               >
-                <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="w-6 h-6 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={l.icon} />
                 </svg>
-                {l.label}
+                <span>{l.label}</span>
               </Link>
             )
           })}
-        </div>
+        </nav>
       </div>
-    </nav>
+
+      {/* Partie inférieure : Bouton Déconnexion fixé en bas */}
+      <div className="p-4 border-t border-[#075bd8]/20 bg-[#02133b]">
+        <button 
+          onClick={handleLogout} 
+          className="w-full flex items-center justify-center gap-2 px-4 py-3 text-sm font-semibold text-white bg-red-600/90 hover:bg-red-600 rounded-xl transition-all shadow-md border border-red-500/50 hover:shadow-red-600/20"
+        >
+          <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+          </svg>
+          <span>Déconnexion</span>
+        </button>
+      </div>
+
+    </aside>
+    </>
   )
 }

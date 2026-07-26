@@ -16,7 +16,19 @@ function ServiceIcon({ name }: { name: string }) {
   let src
   let alt = name
 
-  if (key.includes('chauffage') || key.includes('climat')) {
+  if (key === 'chauffage') {
+    src = iconChauffage
+    alt = 'Chauffage'
+  } else if (key === 'plombier') {
+    src = iconPlomberie
+    alt = 'Plomberie'
+  } else if (key === 'maintenance') {
+    src = iconMaintenance
+    alt = 'Maintenance'
+  } else if (key === 'travaux') {
+    src = iconTravaux
+    alt = 'Travaux'
+  } else if (key.includes('chauffage') || key.includes('climat')) {
     src = iconChauffage
     alt = 'Chauffage'
   } else if (key.includes('plomb') || key.includes('faucet')) {
@@ -86,7 +98,7 @@ export default async function ServicesSection() {
             </div>
 
             <div className={styles.serviceIconWrapper}>
-              <ServiceIcon name={service.icon ?? 'default'} />
+              <ServiceIcon name={service.icon || service.title || 'default'} />
             </div>
           </article>
         ))}

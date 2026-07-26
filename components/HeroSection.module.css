@@ -368,6 +368,11 @@
   .footerPillars {
     grid-template-columns: repeat(2, 1fr);
   }
+
+  .footerIcon {
+    width: 140px;
+    height: 140px;
+  }
 }
 
 @media (max-width: 530px) {

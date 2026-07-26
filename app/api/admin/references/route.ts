@@ -1,3 +1,4 @@
+import { Prisma } from '@prisma/client'
 import prisma from '../../../../lib/prisma'
 import { getAdminUserFromRequest } from '../../../../lib/adminAuth'
 
@@ -7,7 +8,20 @@ export async function GET(request: Request) {
     return new Response(JSON.stringify({ error: 'Non autorisé' }), { status: 401 })
   }
 
-  const references = await prisma.reference.findMany({ orderBy: { createdAt: 'desc' } })
+  const url = new URL(request.url)
+  const q = url.searchParams.get('q')
+
+  const where = q
+    ? {
+        OR: [
+          { name: { contains: q, mode: Prisma.QueryMode.insensitive } },
+          { description: { contains: q, mode: Prisma.QueryMode.insensitive } },
+          { category: { contains: q, mode: Prisma.QueryMode.insensitive } },
+        ],
+      }
+    : undefined
+
+  const references = await prisma.reference.findMany({ where, orderBy: { createdAt: 'desc' } })
   return new Response(JSON.stringify(references), { status: 200 })
 }
 

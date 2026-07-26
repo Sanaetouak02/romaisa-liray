@@ -168,11 +168,14 @@
   .serviceIconWrapper {
     order: 3;
     padding: 10px;
+    min-width: 140px;
   }
 
+  .serviceIcon,
+  .serviceIconWrapper img,
   .serviceIconWrapper svg {
-    width: 120px;
-    height: 120px;
+    width: 140px;
+    height: 140px;
   }
 
   .serviceTitle {
@@ -202,83 +205,11 @@
     font-size: 14px;
   }
 
+  .serviceIcon,
+  .serviceIconWrapper img,
   .serviceIconWrapper svg {
-    width: 72px;
-    height: 72px;
-  }
-
-  .footerPillars {
-    grid-template-columns: 1fr;
-    padding: 25px 15px 15px;
-  }
-
-  .footerPillar {
-    min-height: 120px;
-    padding: 12px 10px;
-  }
-}
-
-/* --- RESPONSIVE --- */
-@media (max-width: 900px) {
-  .serviceItem {
-    grid-template-columns: 1fr;
-    gap: 20px;
-    padding: 25px 0;
-  }
-
-  .serviceImageWrapper {
-    height: 180px;
-    order: 1;
-  }
-
-  .serviceContent {
-    order: 2;
-  }
-
-  .serviceIconWrapper {
-    order: 3;
-    padding: 10px;
-  }
-
-  .serviceIconWrapper svg {
-    width: 120px;
-    height: 120px;
-  }
-
-  .serviceTitle {
-    font-size: 26px;
-  }
-
-  .footerPillars {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 30px 20px 20px;
-  }
-
-  .footerPillar::before {
-    inset: 12% 10%;
-  }
-}
-
-@media (max-width: 530px) {
-  .servicesSection {
-    padding: 50px 20px;
-  }
-
-  .serviceImageWrapper {
-    height: 150px;
-  }
-
-  .serviceTitle {
-    font-size: 22px;
-  }
-
-  .serviceDescription {
-    font-size: 14px;
-  }
-
-  .serviceIconWrapper svg {
-    width: 72px;
-    height: 72px;
+    width: 96px;
+    height: 96px;
   }
 
   .footerPillars {

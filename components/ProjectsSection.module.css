@@ -195,27 +195,112 @@
   margin-top: 30px;
 }
 
+.projectImagePlaceholder {
+  width: 100%;
+  height: 150px;
+  display: grid;
+  place-items: center;
+  background: #f2f8ff;
+  color: #3a4659;
+  border-radius: 10px;
+}
+
+.paginationButton:disabled,
+.arrowButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (max-width: 1024px) {
+  .projectsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .clientsGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .clientsSection {
+    margin: 40px 0;
+    padding: 30px 0;
+  }
+
+  .clientsHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .clientsTitle {
+    font-size: 28px;
+  }
+
+  .clientsControls {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    width: 100%;
+  }
+
+  .arrowButton {
+    width: 36px;
+    height: 36px;
+    font-size: 0.95rem;
+    padding: 0;
+    flex-shrink: 0;
+  }
+
+  .clientSlider {
+    gap: 12px;
+    grid-auto-columns: minmax(180px, 1fr);
+    flex: 1 1 auto;
+    min-width: 0;
+    width: auto;
+  }
+
+  .clientCard {
+    padding: 18px 14px;
+    min-height: 180px;
+    scroll-snap-align: start;
+  }
+
+  .projectCard {
+    padding: 18px;
+  }
+}
+
 .clientSlider {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 20px;
-  overflow: visible;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(180px, 1fr);
+  gap: 18px;
+  overflow-x: auto;
   padding: 10px 0;
   align-items: stretch;
   flex: 1;
+  scroll-snap-type: x proximity;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
 }
 
 .arrowButton {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border-radius: 999px;
   background: #075bd8;
   color: #ffffff;
   text-decoration: none;
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 700;
   transition: transform 0.2s ease, background 0.2s ease;
   flex-shrink: 0;

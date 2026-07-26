@@ -1,10 +1,10 @@
-"use client"
+'use client'
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Image from 'next/image'
-// Assurez-vous que le chemin vers votre logo est correct
 import logoMark from '../../../images/Logo.svg'
+import bgImage from '../../../images/logo2.png'
 
 export default function AdminLoginPage() {
   const [email, setEmail] = useState('admin@romaisa.com')
@@ -24,7 +24,7 @@ export default function AdminLoginPage() {
           router.replace('/admin/dashboard')
         }
       } catch (err) {
-        // Ignore errors, user is not logged in
+        // Ignorer les erreurs
       }
     }
 
@@ -60,103 +60,119 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#f4f7fc] to-[#e2ebfa] p-4 font-['DM_Sans']">
-      <div className="w-full max-w-md bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden">
+    <div className="w-full min-h-screen flex items-center justify-center bg-gray-50 p-4 font-['DM_Sans']">
+      
+      {/* Carte unique et épurée */}
+      <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100">
         
-        {/* En-tête avec Logo */}
-        <div className="bg-[#031b50] p-8 text-center relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-[#075bd8]/20 to-transparent pointer-events-none" />
-          <div className="relative z-10 flex flex-col items-center">
-            <div className="bg-white p-3 rounded-full shadow-lg mb-4">
-              <Image 
-                src={logoMark} 
-                alt="Logo EURL Romaïsa Liray" 
-                width={56} 
-                height={56} 
-                className="object-contain"
-              />
-            </div>
-            <h2 className="font-['Bebas_Neue'] text-3xl text-white tracking-wider mb-1">
-              ESPACE ADMIN
-            </h2>
-            <p className="text-[#71b4ff] text-sm font-semibold tracking-wide uppercase">
-              EURL ROMAISA LIRAY
+        {/* Section Gauche - Image de fond */}
+        <div className="hidden md:flex md:w-7/12 p-10 flex-col justify-between relative overflow-hidden bg-slate-900 min-h-[500px]">
+          
+          <Image 
+            src={bgImage}
+            alt="Fond EURL Romaïsa Liray" 
+            fill
+            className="object-cover z-0 opacity-80"
+            priority
+          />
+
+          {/* Superposition pour préserver la lisibilité */}
+          <div className="absolute inset-0 bg-black/40 z-0"></div>
+          
+     
+
+          {/* Texte Bienvenue */}
+          <div className="relative z-10">
+            <h1 className="text-4xl font-bold text-white mb-3 leading-tight drop-shadow-md">
+              Bienvenue !
+            </h1>
+            <p className="text-white/90 text-base drop-shadow">
+              Connectez-vous à votre espace administration
             </p>
           </div>
+
+          <div className="relative z-10"></div>
         </div>
 
-        {/* Formulaire */}
-        <div className="p-8">
-          <form onSubmit={handleSubmit} className="space-y-5">
+        {/* Section Droite - Formulaire */}
+        <div className="w-full md:w-5/12 p-8 md:p-10 bg-white flex flex-col justify-center">
+          <div className="w-full max-w-md mx-auto">
             
-            {/* Champ Email */}
-            <div>
-              <label className="block text-sm font-bold text-[#031b50] mb-1.5">
-                Adresse E-mail
-              </label>
-              <input 
-                type="email"
-                required
-                className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#075bd8]/40 focus:border-[#075bd8] transition-all"
-                placeholder="admin@romaisa.com"
-                value={email} 
-                onChange={(e) => setEmail(e.target.value)} 
-              />
+            {/* En-tête */}
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold text-gray-800 mb-2">
+                Connexion
+              </h2>
+              
             </div>
 
-            {/* Champ Mot de passe */}
-            <div>
-              <label className="block text-sm font-bold text-[#031b50] mb-1.5">
-                Mot de passe
-              </label>
-              <input 
-                type="password"
-                required
-                className="w-full border border-gray-200 rounded-lg px-4 py-3 text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#075bd8]/40 focus:border-[#075bd8] transition-all"
-                placeholder="••••••••"
-                value={password} 
-                onChange={(e) => setPassword(e.target.value)} 
-              />
-            </div>
-
-            {/* Message d'erreur */}
-            {error && (
-              <div className="bg-red-50 border border-red-100 text-red-600 text-sm p-3 rounded-lg flex items-start gap-2">
-                <svg className="w-5 h-5 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <span>{error}</span>
+            {/* Formulaire */}
+            <form onSubmit={handleSubmit} className="space-y-4">
+              
+              {/* Champ Email */}
+              <div>
+                <label className="block text-xs font-medium text-gray-700 mb-1">
+                Email
+                </label>
+                <input 
+                  type="email"
+                  required
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600/40 focus:border-blue-600 transition-all"
+                  placeholder="nom@exemple.com"
+                  value={email} 
+                  onChange={(e) => setEmail(e.target.value)} 
+                />
               </div>
-            )}
 
-            {/* Bouton de soumission */}
-            <button 
-              type="submit" 
-              disabled={isLoading}
-              className="w-full bg-gradient-to-r from-[#0789fb] to-[#075bd8] text-white font-bold py-3.5 px-4 rounded-lg hover:from-[#075bd8] hover:to-[#031b50] transition-all shadow-md hover:shadow-lg disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-            >
-              {isLoading ? (
-                <>
-                  <svg className="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+              {/* Champ Mot de passe */}
+              <div>
+                <label className="block text-xs font-medium text-gray-700 mb-1">
+                  Mot de passe
+                </label>
+                <input 
+                  type="password"
+                  required
+                  className="w-full border border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-600/40 focus:border-blue-600 transition-all"
+                  placeholder="••••••••"
+                  value={password} 
+                  onChange={(e) => setPassword(e.target.value)} 
+                />
+              </div>
+
+              {/* Message d'erreur */}
+              {error && (
+                <div className="bg-red-50 border border-red-100 text-red-600 text-xs p-3 rounded-xl flex items-start gap-2">
+                  <svg className="w-4 h-4 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
-                  Connexion en cours...
-                </>
-              ) : (
-                'Se connecter'
+                  <span>{error}</span>
+                </div>
               )}
-            </button>
 
-          </form>
+              {/* Bouton Bleu Foncé */}
+              <button 
+                type="submit" 
+                disabled={isLoading}
+                className="w-full bg-gradient-to-r from-blue-700 to-blue-800 hover:from-blue-800 hover:to-blue-900 text-white font-semibold py-3 px-4 rounded-xl text-sm transition-all shadow-md hover:shadow-blue-900/30 disabled:opacity-70 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+              >
+                {isLoading ? (
+                  <>
+                    <svg className="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Connexion en cours...
+                  </>
+                ) : (
+                  'Se connecter'
+                )}
+              </button>
 
-          {/* Pied de carte */}
-          <div className="mt-6 text-center">
-            <p className="text-xs text-gray-400">
-              © 2026 EURL ROMAISA LIRAY. Tous droits réservés.
-            </p>
+            </form>
+
           </div>
         </div>
+
       </div>
     </div>
   )
