@@ -10,20 +10,19 @@ async function sign(value: string) {
   const data = encoder.encode(value)
   const keyData = encoder.encode(SESSION_SECRET)
 
-  if (typeof globalThis.crypto?.subtle !== 'undefined') {
-    const key = await globalThis.crypto.subtle.importKey(
-      'raw',
-      keyData,
-      { name: 'HMAC', hash: 'SHA-256' },
-      false,
-      ['sign'],
-    )
-    const signature = await globalThis.crypto.subtle.sign('HMAC', key, data)
-    return Array.from(new Uint8Array(signature)).map((byte) => byte.toString(16).padStart(2, '0')).join('')
+  if (typeof globalThis.crypto?.subtle === 'undefined') {
+    throw new Error('Web Crypto API is required for admin authentication')
   }
 
-  const { createHmac } = await import('crypto')
-  return createHmac('sha256', SESSION_SECRET).update(value).digest('hex')
+  const key = await globalThis.crypto.subtle.importKey(
+    'raw',
+    keyData,
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign'],
+  )
+  const signature = await globalThis.crypto.subtle.sign('HMAC', key, data)
+  return Array.from(new Uint8Array(signature)).map((byte) => byte.toString(16).padStart(2, '0')).join('')
 }
 
 export async function createAdminToken(userId: number) {
