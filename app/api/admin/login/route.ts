@@ -23,6 +23,7 @@ export async function POST(request: Request) {
 
   const token = await createAdminToken(user.id)
   const maxAge = getSessionMaxAge()
-  const headers = new Headers({ 'Set-Cookie': `${getAdminCookieName()}=${encodeURIComponent(token)}; HttpOnly; Path=/; Max-Age=${maxAge}; SameSite=Lax` })
+  const cookieValue = `${getAdminCookieName()}=${encodeURIComponent(token)}; HttpOnly; Path=/; Max-Age=${maxAge}; SameSite=Lax${process.env.NODE_ENV === 'production' ? '; Secure' : ''}`
+  const headers = new Headers({ 'Set-Cookie': cookieValue })
   return new Response(JSON.stringify({ ok: true }), { status: 200, headers })
 }
