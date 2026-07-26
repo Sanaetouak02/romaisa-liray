@@ -7,8 +7,8 @@ import logoMark from '../../../images/Logo.svg'
 import bgImage from '../../../images/logo2.png'
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('admin@romaisa.com')
-  const [password, setPassword] = useState('admin123')
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(false)
   const router = useRouter()
@@ -67,7 +67,7 @@ export default function AdminLoginPage() {
       <div className="w-full max-w-5xl bg-white rounded-3xl shadow-xl overflow-hidden flex flex-col md:flex-row border border-gray-100">
         
         {/* Section Gauche - Image de fond */}
-        <div className="hidden md:flex md:w-7/12 p-10 flex-col justify-between relative overflow-hidden bg-slate-900 min-h-[500px]">
+        <div className="w-full md:flex md:w-7/12 p-6 md:p-10 flex-col justify-between relative overflow-hidden bg-slate-900 min-h-[240px]">
           
           <Image 
             src={bgImage}
