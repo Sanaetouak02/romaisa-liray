@@ -100,11 +100,6 @@ export default function Header() {
             </Link>
           ))}
           
-          <div className={styles.mobileCtaWrapper}>
-            <Link href="#contact" className={styles.mobileCtaButton} onClick={() => setIsMenuOpen(false)}>
-              Contactez-nous
-            </Link>
-          </div>
         </nav>
       </div>
     </header>
