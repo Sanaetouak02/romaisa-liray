@@ -1,7 +1,7 @@
 import Image, { StaticImageData } from 'next/image'
 import SectionTitle from './SectionTitle'
 import styles from './AboutSection.module.css'
-import aboutImage from '../pic/Pic1.png'
+import aboutImage from '../pic/Pic5.png'
 import expertiseIcon from '../images/EXPERTISE.svg'
 import qualiteIcon from '../images/QUALITE.svg'
 import reactiviteIcon from '../images/REACTIVITE.svg'

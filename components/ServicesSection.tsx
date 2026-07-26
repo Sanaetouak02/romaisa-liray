@@ -76,7 +76,7 @@ export default async function ServicesSection() {
 
   return (
     <section id="services" className={styles.servicesSection}>
-      <SectionTitle eyebrow="SERVICES & SOLUTIONS" title="Nos domaines d'intervention" />
+      <SectionTitle eyebrow="" title="Nos domaines d'intervention" />
       
       <div className={styles.servicesContainer}>
         {services.map((service) => (

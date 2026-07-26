@@ -34,8 +34,8 @@
 }
 
 .aboutGrid strong {
-  color: #075bd8;
-  font-weight: 700;
+  color: #4d83d5;
+  font-weight: 800;
 }
 
 .imageAbout {
@@ -58,7 +58,7 @@
 .mainTitle {
   font-family: 'Bebas Neue', Impact, sans-serif;
   font-size: clamp(48px, 7vw, 72px);
-  color: #031b50;
+  color:#0334B3;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   margin: 0 0 20px 0;
@@ -73,8 +73,8 @@
 }
 
 .subtitle strong {
-  color: #075bd8;
-  font-weight: 700;
+  color: #4d83d5;
+  font-weight: 800;
 }
 
 .valuesGrid {
@@ -106,15 +106,15 @@
 
 .valueTitle {
   font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: 20px;
-  color: #031b50;
+  font-size: 30px;
+  color: #1e4496;
   text-transform: uppercase;
   letter-spacing: 0.02em;
   margin: 0 0 8px 0;
 }
 
 .titleUnderline {
-  width: 40px;
+  width: 50px;
   height: 2px;
   background: linear-gradient(90deg, #075bd8, #031b50);
   margin-bottom: 16px;
@@ -136,7 +136,7 @@
 .valueText {
   font-size: 16px;
   line-height: 1.8;
-  color: #3a4659;
+  color: #050505;
   margin: 0;
 }
 

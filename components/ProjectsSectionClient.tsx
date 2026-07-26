@@ -96,7 +96,7 @@ export default function ProjectsSectionClient({
 
   return (
     <section id="realisations" className={styles.projectsSection}>
-      <SectionTitle eyebrow="EURL ROMAISA LIRAY" title="GALERIE DE RÉALISATIONS" />
+      <SectionTitle eyebrow="" title="GALERIE DE RÉALISATIONS" />
 
       
 

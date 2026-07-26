@@ -122,22 +122,28 @@
 }
 
 /* EURL en bleu nuit */
+/* EURL en bleu nuit avec ligne */
 .heroEurl {
-  color: #031b50;
+  font-family: 'Bebas Neue', Impact, sans-serif;
+  color: #676769;
   text-transform: uppercase;
-  font-weight: 700;
-  font-size: 15px;
+  font-weight: 900;
+  font-size: 20px;
   letter-spacing: 0.4em;
   margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 2px solid #0334B3;
+  display: inline-block;
 }
 
 /* ROMAISA LIRAY en bleu nuit */
 .heroCompanyName {
+  font-family: 'Bebas Neue', Impact, sans-serif;
   color: #031b50;
-  font-size: clamp(28px, 5vw, 44px);
+  font-size: clamp(50px, 8vw, 50px);
   font-weight: 800;
   letter-spacing: 0.1em;
-  margin: 0;
+  margin: 10px 0 0;
   text-transform: uppercase;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -145,95 +151,50 @@
 /* Titre principal */
 .heroMainTitle {
   font-family: 'Bebas Neue', Impact, sans-serif;
-  font-size: clamp(56px, 9vw, 110px);
+  font-size: clamp(32px, 6.5vw, 110px); /* Ajusté pour bien rentrer sur mobile sans dépasser */
   line-height: 0.9;
-  margin: 10px 0 15px;
+  margin: 5px 0 15px;
   text-transform: uppercase;
   letter-spacing: 0.02em;
-  text-align: center;
-  max-width: 920px;
-  color: #ffffff;
+  max-width: 100%; /* S'adapte à la largeur disponible */
+  width: max-content;
+  
+  /* Empêche le retour à la ligne */
+  white-space: nowrap; 
+
+  color: #031b50;
   text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
 }
 
-/* ET HYDRAULIQUE en gris métallique/argent */
 .heroTitleHighlight {
   display: block;
-  background: linear-gradient(180deg, #c0c0c0 0%, #808080 40%, #606060 100%);
+  font-size: clamp(80px, 9vw, 210px);
+  
+  /* Espacement important entre les lettres */
+  letter-spacing: 0.1em; /* Ajuste selon tes préférences (ex: 0.15em, 0.25em, 0.3em) */
+  text-transform: uppercase;
+  
+  /* Dégradé gris métallique / argenté plus contrasté */
+  background: linear-gradient(180deg, #070707 0%, #8d8d8f 25%, #71747b 55%, #4B5563 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
+  
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
   margin-top: 5px;
-  font-weight: 700;
-}
-
-/* ET HYDRAULIQUE en gris métallique/argent */
-.heroTitleHighlight {
-  display: block;
-  background: linear-gradient(180deg, #c0c0c0 0%, #808080 40%, #606060 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.2));
-  margin-top: 5px;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 /* EXPERTISE • QUALITÉ... en noir */
 .heroValues {
   color: #000000;
-  font-size: 18px;
+  font-size: 20px;
   font-weight: 900;
-  letter-spacing: 0.32em;
+  letter-spacing: 0.30em;
   text-transform: uppercase;
   margin: 0 0 35px;
   text-align: center;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.25);
-}
-
-/* --- BOUTONS --- */
-.heroActions {
-  display: flex;
-  gap: 16px;
-  flex-wrap: wrap;
-  justify-content: center;
-  z-index: 10;
-}
-
-.button {
-  padding: 16px 32px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-  font-size: 15px;
-}
-.buttonBlue {
-  background: linear-gradient(135deg, #0789fb 0%, #075bd8 100%);
-  color: #ffffff;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 15px rgba(7, 91, 216, 0.4);
-}
-
-.buttonBlue:hover {
-  background: linear-gradient(135deg, #075bd8 0%, #031b50 100%);
-  transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(7, 91, 216, 0.6);
-}
-
-.buttonOutline {
-  background: rgba(255, 255, 255, 0.9);
-  border: 2px solid #031b50;
-  color: #031b50;
-  backdrop-filter: blur(10px);
-}
-
-.buttonOutline:hover {
-  background: rgba(3, 27, 80, 0.1);
-  border-color: #031b50;
-  transform: translateY(-2px);
 }
 
 /* --- RESPONSIVE --- */
@@ -305,21 +266,19 @@
     font-size: 15px;
   }
 }
-
 .heroFooter {
-
   background-color: #031c3f;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   box-shadow: none;
-  padding: 20px 0 50px;
+  padding: 8px 0 16px; /* Réduit le padding haut/bas */
 }
 
 .footerPillars {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
+  gap: 16px; /* Espace réduit entre les éléments */
   width: 100%;
   margin: 0;
   padding: 0 20px;
@@ -330,9 +289,9 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 12px;
-  min-height: 180px;
-  padding: 12px 10px;
+  gap: 6px; /* Espace réduit entre l'icône et le texte */
+  min-height: auto; /* Supprime la hauteur minimale imposée de 180px */
+  padding: 6px 5px; /* Padding réduit */
   background: transparent;
   border-radius: 0;
   border: none;
@@ -341,8 +300,8 @@
 }
 
 .footerIcon {
-  width: 220px;
-  height: 220px;
+  width: 120px; /* Taille fortement réduite (ajustable selon ton rendu, ex: 60px à 100px) */
+  height: 120px;
   background: transparent;
   padding: 0;
   border-radius: 0;
@@ -351,9 +310,9 @@
 
 .footerLabel {
   color: #ffffff;
-  font-size: 15px;
+  font-size: 13px; /* Taille de police légèrement plus compacte */
   font-weight: 800;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   text-align: center;
   max-width: 100%;

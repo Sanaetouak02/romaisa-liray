@@ -26,7 +26,7 @@ export default async function ReferencesSection() {
         </div>
         <div className={styles.titleWrapper}>
           <SectionTitle 
-            eyebrow="EURL ROMAISA LIRAY" 
+            eyebrow="" 
             title="RÉFÉRENCES CLIENTS" 
           />
         </div>

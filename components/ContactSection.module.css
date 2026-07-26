@@ -1,7 +1,7 @@
 .contactSection {
   padding: 80px clamp(20px, 4vw, 80px);
   /* Background dégradé bleu professionnel */
-  background: linear-gradient(135deg, #031b50 0%, #075bd8 50%, #0789fb 100%);
+  background: linear-gradient(135deg, #031b50 0%, #0e2951 50%, #1d609b 100%);
   position: relative;
   overflow: hidden;
 }
