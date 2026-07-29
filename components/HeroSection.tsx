@@ -25,7 +25,7 @@ export default function HeroSection() {
 
           <h1 className={styles.heroMainTitle}>
             TRAVAUX D'ASSAINISSEMENT
-            <span className={styles.heroTitleHighlight}>ET HYDRAULIQUE</span>
+            <span className={styles.heroTitleHighlight}>ET D'HYDRAULIQUE</span>
           </h1>
 
           <p className={styles.heroValues}>EXPERTISE • QUALITÉ • PERFORMANCE • ENGAGEMENT</p>

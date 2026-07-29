@@ -220,7 +220,14 @@
   }
 
   .heroMainTitle {
-    font-size: 50px;
+    font-size: 48px;
+    white-space: normal;
+    width: auto;
+  }
+
+  .heroTitleHighlight {
+    font-size: 72px;
+    letter-spacing: 0.08em;
   }
 }
 
@@ -252,12 +259,19 @@
   }
 
   .heroMainTitle {
-    font-size: 40px;
+    font-size: 34px;
+    white-space: normal;
+    width: auto;
   }
 
   .heroValues {
     font-size: 15px;
     letter-spacing: 0.15em;
+  }
+
+  .heroTitleHighlight {
+    font-size: 50px;
+    letter-spacing: 0.06em;
   }
 
   .button {
@@ -341,7 +355,44 @@
   }
 
   .footerPillar {
-    min-height: 120px;
-    padding: 18px 12px;
+    min-height: 90px;
+    padding: 12px 10px;
+  }
+
+  .footerIcon {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 400px) {
+  .heroMainTitle {
+    font-size: 26px;
+  }
+
+  .heroTitleHighlight {
+    font-size: 38px;
+  }
+
+  .heroValues {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+  }
+
+  .footerIcon {
+    width: 80px;
+    height: 80px;
+  }
+
+  .footerLabel {
+    font-size: 11px;
+  }
+
+  .heroEurl {
+    font-size: 16px;
+  }
+
+  .heroCompanyName {
+    font-size: 36px;
   }
 }

@@ -51,7 +51,7 @@ export default function AboutSection() {
           <div>
             <SectionTitle eyebrow="EURL ROMAISA LIRAY" title="Qui sommes-nous ?" />
             <p className={styles.lead}>
-              <strong>EURL ROMAISA LIRAY</strong> est une entreprise spécialisée dans les travaux d'assainissement et hydraulique.
+              <strong>EURL ROMAISA LIRAY</strong> est une entreprise spécialisée dans les travaux d'assainissement et d'hydraulique.
             </p>
             <p>
               Forts de notre <strong>expertise technique</strong> et de notre expérience dans le secteur du <strong>BTP</strong>, nous accompagnons les professionnels, les copropriétés et les entreprises industrielles dans la <strong>conception, la réalisation et la maintenance d'installations fluides</strong>.
