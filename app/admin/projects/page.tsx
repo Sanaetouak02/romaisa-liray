@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import { showNotification } from '../../../components/AdminNotification'
 
 type Project = { id?: number; title: string; description: string; image?: string; client?: string; category?: string }
 
@@ -9,7 +10,6 @@ export default function AdminProjectsPage() {
   const [form, setForm] = useState<Partial<Project>>({ title: '', description: '', image: '' })
   const [editingId, setEditingId] = useState<number | null>(null)
   const [draft, setDraft] = useState<Partial<Project>>({})
-  const [message, setMessage] = useState('')
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
   const [search, setSearch] = useState('')
@@ -67,7 +67,6 @@ export default function AdminProjectsPage() {
   }, [])
 
   async function create() {
-    setMessage('')
     const payload = {
       title: form.title?.trim(),
       image: form.image?.trim(),
@@ -82,14 +81,13 @@ export default function AdminProjectsPage() {
     if (res.ok) {
       await load()
       setForm({ title: '', description: '', image: '' })
-      setMessage('Réalisation ajoutée avec succès.')
+      showNotification('Réalisation ajoutée avec succès.', 'success')
     } else {
-      setMessage('Échec de l’ajout de la réalisation.')
+      showNotification('Échec de l\'ajout de la réalisation.', 'error')
     }
   }
 
   async function update(project: Project) {
-    setMessage('')
     const payload = {
       image: draft.image?.trim() || project.image,
       description: draft.description?.trim() || project.description,
@@ -105,9 +103,9 @@ export default function AdminProjectsPage() {
       await load()
       setEditingId(null)
       setDraft({})
-      setMessage('Projet mis à jour avec succès.')
+      showNotification('Projet mis à jour avec succès.', 'success')
     } else {
-      setMessage('Échec de la modification du projet.')
+      showNotification('Échec de la modification du projet.', 'error')
     }
   }
 
@@ -117,7 +115,9 @@ export default function AdminProjectsPage() {
     const res = await fetch(`/api/admin/projects/${id}`, { method: 'DELETE', credentials: 'include' })
     if (res.ok) {
       await load()
-      setMessage('Projet supprimé.')
+      showNotification('Projet supprimé.', 'success')
+    } else {
+      showNotification('Échec de la suppression du projet.', 'error')
     }
   }
 
@@ -279,8 +279,6 @@ export default function AdminProjectsPage() {
           </div>
         ))}
       </div>
-
-      {message ? <p className="text-sm text-indigo-100">{message}</p> : null}
     </div>
   )
 }

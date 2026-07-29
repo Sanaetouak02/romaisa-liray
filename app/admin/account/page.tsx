@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import { showNotification } from '../../../components/AdminNotification'
 
 export default function AdminAccountPage() {
   const [loading, setLoading] = useState(true)
@@ -7,7 +8,6 @@ export default function AdminAccountPage() {
   const [name, setName] = useState('')
   const [currentPassword, setCurrentPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
-  const [message, setMessage] = useState('')
 
   useEffect(() => { load() }, [])
 
@@ -23,7 +23,6 @@ export default function AdminAccountPage() {
   }
 
   async function save() {
-    setMessage('')
     const payload: any = { currentPassword }
     if (newPassword) payload.newPassword = newPassword
     if (email) payload.email = email
@@ -31,12 +30,12 @@ export default function AdminAccountPage() {
 
     const res = await fetch('/api/admin/account', { method: 'PUT', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
     if (res.ok) {
-      setMessage('Mise à jour effectuée.')
+      showNotification('Mise à jour effectuée avec succès.', 'success')
       setCurrentPassword('')
       setNewPassword('')
     } else {
       const err = await res.json().catch(() => ({}))
-      setMessage(err.error || 'Erreur lors de la mise à jour.')
+      showNotification(err.error || 'Erreur lors de la mise à jour du compte.', 'error')
     }
   }
 
@@ -75,8 +74,6 @@ export default function AdminAccountPage() {
         <div className="mt-4 flex gap-3">
           <button onClick={save} className="rounded-2xl bg-white px-4 py-2.5 text-sm font-semibold text-slate-900">Enregistrer</button>
         </div>
-
-        {message ? <p className="mt-3 text-sm text-indigo-100">{message}</p> : null}
       </div>
     </div>
   )

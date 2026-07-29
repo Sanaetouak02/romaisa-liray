@@ -2,7 +2,7 @@ export const dynamic = 'force-dynamic'
 
 import Header from '../components/Header'
 import HeroSection from '../components/HeroSection'
-import AboutSection from '../components/AboutSection' // Contient maintenant "Qui sommes-nous" + "Expertise"
+import AboutSection from '../components/AboutSection'
 import ServicesSection from '../components/ServicesSection'
 import ProjectsSection from '../components/ProjectsSection'
 import ReferencesSection from '../components/ReferencesSection'
@@ -16,7 +16,7 @@ export default function Home({ searchParams }: { searchParams: { projectsPage?: 
     <main>
       <Header />
       <HeroSection />
-      <AboutSection />       {/* Contient maintenant "Qui sommes-nous" + "Expertise" */}
+      <AboutSection />
       <ServicesSection />
       <ProjectsSection projectsPage={projectsPage} clientsPage={clientsPage} />
       <ReferencesSection />
@@ -25,7 +25,7 @@ export default function Home({ searchParams }: { searchParams: { projectsPage?: 
       <footer className="site-footer">
         <div className="footer-container">
           <span>© 2026 EURL ROMAISA LIRAY</span>
-          <span>Travaux d’assainissement et hydraulique</span>
+          <span>Travaux d'assainissement et hydraulique</span>
         </div>
       </footer>
     </main>

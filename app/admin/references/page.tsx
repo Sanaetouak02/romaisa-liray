@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import { showNotification } from '../../../components/AdminNotification'
 
 type Reference = { id?: number; name: string; description: string; category?: string }
 
@@ -9,7 +10,6 @@ export default function AdminReferencesPage() {
   const [form, setForm] = useState<Partial<Reference>>({ name: '', description: '', category: 'Public' })
   const [editingId, setEditingId] = useState<number | null>(null)
   const [draft, setDraft] = useState<Partial<Reference>>({})
-  const [message, setMessage] = useState('')
   const [search, setSearch] = useState('')
 
   const publicReferences = references.filter((reference) => (reference.category || 'Public') === 'Public')
@@ -40,7 +40,6 @@ export default function AdminReferencesPage() {
   }, [])
 
   async function create() {
-    setMessage('')
     const res = await fetch('/api/admin/references', {
       method: 'POST',
       credentials: 'include',
@@ -50,14 +49,13 @@ export default function AdminReferencesPage() {
     if (res.ok) {
       await load()
       setForm({ name: '', description: '', category: 'Public' })
-      setMessage('Référence ajoutée.')
+      showNotification('Référence ajoutée avec succès.', 'success')
     } else {
-      setMessage('Échec de l’ajout de la référence.')
+      showNotification('Échec de l\'ajout de la référence.', 'error')
     }
   }
 
   async function update(reference: Reference) {
-    setMessage('')
     const res = await fetch(`/api/admin/references/${reference.id}`, {
       method: 'PUT',
       credentials: 'include',
@@ -68,9 +66,9 @@ export default function AdminReferencesPage() {
       await load()
       setEditingId(null)
       setDraft({})
-      setMessage('Référence mise à jour.')
+      showNotification('Référence mise à jour avec succès.', 'success')
     } else {
-      setMessage('Échec de la modification de la référence.')
+      showNotification('Échec de la modification de la référence.', 'error')
     }
   }
 
@@ -80,7 +78,9 @@ export default function AdminReferencesPage() {
     const res = await fetch(`/api/admin/references/${id}`, { method: 'DELETE', credentials: 'include' })
     if (res.ok) {
       await load()
-      setMessage('Référence supprimée.')
+      showNotification('Référence supprimée.', 'success')
+    } else {
+      showNotification('Échec de la suppression de la référence.', 'error')
     }
   }
 
@@ -311,8 +311,6 @@ export default function AdminReferencesPage() {
           </div>
         </div>
       </div>
-
-      {message ? <p className="text-sm text-indigo-100">{message}</p> : null}
     </div>
   )
 }

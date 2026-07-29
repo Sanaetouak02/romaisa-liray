@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { FiBriefcase, FiUsers, FiCheckCircle } from 'react-icons/fi'
 import styles from './ReferencesSection.module.css'
 
@@ -24,7 +24,9 @@ function ReferencesTable({
   Icon: typeof FiBriefcase
   references: Reference[]
 }) {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+  )
   const [page, setPage] = useState(1)
 
   useEffect(() => {
@@ -56,13 +58,6 @@ function ReferencesTable({
     () => references.slice((page - 1) * refsPerPage, page * refsPerPage),
     [references, page, refsPerPage]
   )
-
-  useEffect(() => {
-    const anchor = document.getElementById('references')
-    if (anchor) {
-      anchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
-    }
-  }, [page])
 
   return (
     <div className={styles.sectionCard}>

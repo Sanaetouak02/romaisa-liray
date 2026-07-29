@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import { showNotification } from '../../../components/AdminNotification'
 
 type Service = { id?: number; number: string; title: string; description: string; icon?: string; image?: string }
 
@@ -9,7 +10,6 @@ export default function AdminServicesPage() {
   const [form, setForm] = useState<Partial<Service>>({ number: '', title: '', description: '', icon: '' })
   const [editingId, setEditingId] = useState<number | null>(null)
   const [draft, setDraft] = useState<Partial<Service>>({})
-  const [message, setMessage] = useState('')
   const [search, setSearch] = useState('')
   const totalServices = services.length
   const lastServiceNumber = services.length
@@ -27,8 +27,7 @@ export default function AdminServicesPage() {
       const json = await res.json()
       return json.url as string
     } catch (err) {
-      // eslint-disable-next-line no-console
-      console.error('Upload error', err)
+      showNotification('Échec de l\'upload de l\'image.', 'error')
       return null
     }
   }
@@ -67,30 +66,28 @@ export default function AdminServicesPage() {
   }
 
   async function create() {
-    setMessage('')
     const payload = { number: form.number?.trim(), title: form.title?.trim(), description: form.description?.trim(), icon: form.icon, image: form.image }
     const res = await fetch('/api/admin/services', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
     if (res.ok) {
       const added = await res.json()
       setServices([added, ...services])
       setForm({ number: '', title: '', description: '', icon: '' })
-      setMessage('Service ajouté.')
+      showNotification('Service ajouté avec succès.', 'success')
     } else {
-      setMessage('Erreur lors de l\'ajout.')
+      showNotification('Erreur lors de l\'ajout du service.', 'error')
     }
   }
 
   async function update(item: Service) {
-    setMessage('')
     const res = await fetch(`/api/admin/services/${item.id}`, { method: 'PUT', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) })
     if (res.ok) {
       const updated = await res.json()
       setServices(services.map((s) => (s.id === updated.id ? updated : s)))
       setEditingId(null)
       setDraft({})
-      setMessage('Modifié.')
+      showNotification('Service modifié avec succès.', 'success')
     } else {
-      setMessage('Erreur lors de la modification.')
+      showNotification('Erreur lors de la modification.', 'error')
     }
   }
 
@@ -100,7 +97,9 @@ export default function AdminServicesPage() {
     const res = await fetch(`/api/admin/services/${id}`, { method: 'DELETE', credentials: 'include' })
     if (res.ok) {
       setServices(services.filter((s) => s.id !== id))
-      setMessage('Supprimé.')
+      showNotification('Service supprimé.', 'success')
+    } else {
+      showNotification('Erreur lors de la suppression.', 'error')
     }
   }
 
@@ -112,6 +111,7 @@ export default function AdminServicesPage() {
     <div className="space-y-6 rounded-3xl border border-slate-200 bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-800 p-6 text-white shadow-xl">
       <div className="space-y-2">
         <p className="text-sm uppercase tracking-[0.3em] text-indigo-200">Administration • Services</p>
+        <h2 className="text-2xl font-semibold">Gestion des services</h2>
         <p className="text-sm text-indigo-100">Total des services : {totalServices} — dernier numéro : {lastServiceNumber}</p>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
@@ -221,8 +221,6 @@ export default function AdminServicesPage() {
           </div>
         ))}
       </div>
-
-      {message ? <p className="text-sm text-indigo-100">{message}</p> : null}
     </div>
   )
 }

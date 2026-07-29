@@ -22,7 +22,9 @@ export default function ProjectsSectionClient({
   initialProjectsPage,
   initialClientsPage,
 }: Props) {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(() =>
+    typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+  )
   const [projectsPage, setProjectsPage] = useState(initialProjectsPage)
   const [clientsPage, setClientsPage] = useState(initialClientsPage)
   const clientSliderRef = useRef<HTMLDivElement | null>(null)
@@ -30,19 +32,8 @@ export default function ProjectsSectionClient({
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 768px)')
     const updateMobile = () => setIsMobile(mediaQuery.matches)
-    updateMobile()
-    if (mediaQuery.addEventListener) {
-      mediaQuery.addEventListener('change', updateMobile)
-    } else {
-      mediaQuery.addListener(updateMobile)
-    }
-    return () => {
-      if (mediaQuery.removeEventListener) {
-        mediaQuery.removeEventListener('change', updateMobile)
-      } else {
-        mediaQuery.removeListener(updateMobile)
-      }
-    }
+    mediaQuery.addEventListener('change', updateMobile)
+    return () => mediaQuery.removeEventListener('change', updateMobile)
   }, [])
 
   const projectsPerPage = isMobile ? 3 : 6
@@ -59,21 +50,14 @@ export default function ProjectsSectionClient({
     setClientsPage((current) => Math.min(Math.max(current, 1), clientPageCount))
   }, [clientPageCount])
 
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const anchor = document.getElementById('realisations')
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [projectsPage])
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const anchor = document.getElementById('clients')
-    if (anchor) anchor.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }, [clientsPage])
-
+  // Mise à jour de l'URL silencieuse (sans scroll)
   useEffect(() => {
     if (typeof window === 'undefined') return
     const currentUrl = new URL(window.location.href)
+    const sp = currentUrl.searchParams
+    if (sp.get('projectsPage') === String(projectsPage) && sp.get('clientsPage') === String(clientsPage)) {
+      return
+    }
     currentUrl.searchParams.set('projectsPage', String(projectsPage))
     currentUrl.searchParams.set('clientsPage', String(clientsPage))
     window.history.replaceState(null, '', `${currentUrl.pathname}${currentUrl.search}`)
@@ -97,8 +81,6 @@ export default function ProjectsSectionClient({
   return (
     <section id="realisations" className={styles.projectsSection}>
       <SectionTitle eyebrow="" title="GALERIE DE RÉALISATIONS" />
-
-      
 
       <div className={styles.projectsGrid}>
         {pageProjects.map((project) => (

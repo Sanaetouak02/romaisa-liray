@@ -105,7 +105,19 @@ section {
 
 .animate-fade-in {
   animation: fadeIn 0.4s ease-out forwards;
-}.site-footer {
+}
+
+/* Slide-in animation for admin notifications */
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(100px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.35s ease-out forwards;
+}
+
+.site-footer {
   background: linear-gradient(180deg, #031b50 0%, #071b4a 100%);
   color: #f8fafc;
   padding: 32px 24px;

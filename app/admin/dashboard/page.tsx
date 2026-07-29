@@ -2,8 +2,8 @@
 
 import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
+import { showNotification } from '../../../components/AdminNotification'
 
-type About = { id?: number; title?: string; description?: string }
 type Contact = { id?: number; email?: string; address?: string; phoneNumbers?: string[] }
 type AdminProfile = { id?: number; name?: string; email?: string; createdAt?: string }
 
@@ -20,8 +20,6 @@ export default function AdminDashboardPage() {
   const [newPassword, setNewPassword] = useState('')
   const [newPhone, setNewPhone] = useState('')
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState<string | null>(null)
-  const [success, setSuccess] = useState<string | null>(null)
   const router = useRouter()
 
   useEffect(() => {
@@ -29,7 +27,6 @@ export default function AdminDashboardPage() {
 
     async function load() {
       setLoading(true)
-      setError(null)
       const [cRes, mRes] = await Promise.all([
         fetch('/api/admin/contact', { credentials: 'include' }),
         fetch('/api/admin/me', { credentials: 'include' }),
@@ -48,9 +45,7 @@ export default function AdminDashboardPage() {
     }
 
     load()
-    return () => {
-      active = false
-    }
+    return () => { active = false }
   }, [router])
 
   useEffect(() => {
@@ -58,51 +53,52 @@ export default function AdminDashboardPage() {
   }, [profile])
 
   async function saveProfile() {
-    setError(null)
-    setSuccess(null)
     const payload: any = { email: adminEmail }
     if (newPassword) payload.password = newPassword
     if (payload.password && !currentPassword) {
-      setError('Le mot de passe actuel est requis pour le changement de mot de passe.')
+      showNotification('Le mot de passe actuel est requis pour le changement de mot de passe.', 'error')
       return
     }
 
     const res = await fetch('/api/admin/me', { method: 'PUT', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...payload, currentPassword }) })
     if (!res.ok) {
       const j = await res.json().catch(() => ({}))
-      setError(j?.error || 'Échec de la mise à jour du compte')
+      showNotification(j?.error || 'Échec de la mise à jour du compte', 'error')
       return
     }
     const updated = await res.json()
     setProfile(updated)
     setNewPassword('')
     setCurrentPassword('')
-    setSuccess('Profil mis à jour avec succès.')
+    showNotification('Profil mis à jour avec succès.', 'success')
   }
 
   async function saveContact() {
-    setError(null)
-    setSuccess(null)
     const payload = { email: contact.email || '', address: contact.address || '', phoneNumbers: contact.phoneNumbers || [] }
     const res = await fetch('/api/admin/contact', { method: 'PUT', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) })
     if (!res.ok) {
       const j = await res.json().catch(() => ({}))
-      setError(j?.error || 'Échec de la mise à jour des coordonnées')
+      showNotification(j?.error || 'Échec de la mise à jour des coordonnées', 'error')
       return
     }
     const updated = await res.json()
     setContact(updated)
-    setSuccess('Coordonnées sauvegardées avec succès.')
+    showNotification('Coordonnées sauvegardées avec succès.', 'success')
   }
 
   function addPhone() {
-    if (!newPhone.trim()) return
+    if (!newPhone.trim()) {
+      showNotification('Veuillez entrer un numéro de téléphone.', 'error')
+      return
+    }
     setContact({ ...contact, phoneNumbers: [...(contact.phoneNumbers || []), newPhone.trim()] })
     setNewPhone('')
+    showNotification('Numéro de téléphone ajouté.', 'success')
   }
 
   function removePhone(idx: number) {
     setContact({ ...contact, phoneNumbers: (contact.phoneNumbers || []).filter((_, i) => i !== idx) })
+    showNotification('Numéro de téléphone supprimé.', 'success')
   }
 
   async function handleLogout() {
@@ -127,16 +123,13 @@ export default function AdminDashboardPage() {
   }
 
   return (
-    /* w-full sans max-w pour prendre toute la largeur disponible */
     <div className="w-full space-y-8 font-['DM_Sans']">
       
-      {/* En-tête de la page */}
       <div className="flex flex-col gap-1 w-full">
         <h1 className="text-3xl font-bold text-slate-900">Tableau de bord</h1>
         <p className="text-sm text-slate-500">Gérez vos paramètres d'administration et vos coordonnées publiques.</p>
       </div>
 
-      {/* Carte de Profil Principal (Pleine largeur) */}
       <div className="w-full rounded-3xl border border-slate-800 bg-gradient-to-br from-slate-900 via-indigo-950 to-slate-900 p-8 text-white shadow-xl">
         <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
           <div className="flex items-center gap-5">
@@ -166,7 +159,6 @@ export default function AdminDashboardPage() {
           </div>
         </div>
 
-        {/* Détails rapides en bas de carte */}
         <div className="mt-8 grid gap-4 sm:grid-cols-3 border-t border-white/10 pt-6">
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
             <p className="text-xs uppercase tracking-widest text-indigo-200 font-medium">Adresse Email</p>
@@ -174,9 +166,7 @@ export default function AdminDashboardPage() {
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
             <p className="text-xs uppercase tracking-widest text-indigo-200 font-medium">Niveau d'accès</p>
-            <p className="mt-1 text-sm font-semibold text-emerald-400 flex items-center gap-1.5">
-              Accès complet
-            </p>
+            <p className="mt-1 text-sm font-semibold text-emerald-400 flex items-center gap-1.5">Accès complet</p>
           </div>
           <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
             <p className="text-xs uppercase tracking-widest text-indigo-200 font-medium">Membre depuis</p>
@@ -187,29 +177,8 @@ export default function AdminDashboardPage() {
         </div>
       </div>
 
-      {/* Notifications */}
-      {error && (
-        <div className="w-full rounded-2xl border border-rose-200 bg-rose-50 p-4 text-sm font-medium text-rose-700 flex items-center gap-3">
-          <svg className="w-5 h-5 flex-shrink-0 text-rose-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-          </svg>
-          <span>{error}</span>
-        </div>
-      )}
-
-      {success && (
-        <div className="w-full rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm font-medium text-emerald-700 flex items-center gap-3">
-          <svg className="w-5 h-5 flex-shrink-0 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-          </svg>
-          <span>{success}</span>
-        </div>
-      )}
-
-      {/* Grille de Gestion (Grille adaptative sur toute la largeur) */}
       <div className="grid gap-8 lg:grid-cols-2 w-full">
         
-        {/* CARTE 1: Gestion du Compte Administrateur */}
         <div className={cardClass}>
           <div className="flex items-center gap-3 border-b border-slate-100 pb-5 mb-6">
             <div className="p-3 bg-indigo-50 text-indigo-600 rounded-2xl">
@@ -225,60 +194,28 @@ export default function AdminDashboardPage() {
 
           <div className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">
-                Adresse email de connexion
-              </label>
-              <input 
-                className={inputClass} 
-                value={adminEmail} 
-                onChange={(e) => setAdminEmail(e.target.value)} 
-                placeholder="admin@exemple.com"
-              />
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Adresse email de connexion</label>
+              <input className={inputClass} value={adminEmail} onChange={(e) => setAdminEmail(e.target.value)} placeholder="admin@exemple.com" />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">
-                  Mot de passe actuel
-                </label>
-                <input 
-                  type="password" 
-                  className={inputClass} 
-                  value={currentPassword} 
-                  onChange={(e) => setCurrentPassword(e.target.value)} 
-                  placeholder="••••••••"
-                />
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Mot de passe actuel</label>
+                <input type="password" className={inputClass} value={currentPassword} onChange={(e) => setCurrentPassword(e.target.value)} placeholder="••••••••" />
               </div>
-
               <div>
-                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">
-                  Nouveau mot de passe
-                </label>
-                <input 
-                  type="password" 
-                  className={inputClass} 
-                  value={newPassword} 
-                  onChange={(e) => setNewPassword(e.target.value)} 
-                  placeholder="••••••••"
-                />
+                <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Nouveau mot de passe</label>
+                <input type="password" className={inputClass} value={newPassword} onChange={(e) => setNewPassword(e.target.value)} placeholder="••••••••" />
               </div>
             </div>
 
             <div className="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
-              <button 
-                onClick={() => { setAdminEmail(profile?.email || ''); setCurrentPassword(''); setNewPassword('') }} 
-                className={buttonSecondary}
-              >
-                Réinitialiser
-              </button>
-              <button onClick={saveProfile} className={buttonPrimary}>
-                Enregistrer le compte
-              </button>
+              <button onClick={() => { setAdminEmail(profile?.email || ''); setCurrentPassword(''); setNewPassword('') }} className={buttonSecondary}>Réinitialiser</button>
+              <button onClick={saveProfile} className={buttonPrimary}>Enregistrer le compte</button>
             </div>
           </div>
         </div>
 
-        {/* CARTE 2: Coordonnées Publiques */}
         <div className={cardClass}>
           <div className="flex items-center gap-3 border-b border-slate-100 pb-5 mb-6">
             <div className="p-3 bg-blue-50 text-blue-600 rounded-2xl">
@@ -294,33 +231,17 @@ export default function AdminDashboardPage() {
 
           <div className="space-y-5">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">
-                Email public de contact
-              </label>
-              <input 
-                className={inputClass} 
-                value={contact.email || ''} 
-                onChange={(e) => setContact({ ...contact, email: e.target.value })} 
-                placeholder="contact@entreprise.com"
-              />
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Email public de contact</label>
+              <input className={inputClass} value={contact.email || ''} onChange={(e) => setContact({ ...contact, email: e.target.value })} placeholder="contact@entreprise.com" />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">
-                Adresse physique
-              </label>
-              <input 
-                className={inputClass} 
-                value={contact.address || ''} 
-                onChange={(e) => setContact({ ...contact, address: e.target.value })} 
-                placeholder="Adresse complète..."
-              />
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Adresse physique</label>
+              <input className={inputClass} value={contact.address || ''} onChange={(e) => setContact({ ...contact, address: e.target.value })} placeholder="Adresse complète..." />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">
-                Numéros de téléphone
-              </label>
+              <label className="block text-xs font-semibold uppercase tracking-wider text-slate-600 mb-2">Numéros de téléphone</label>
               
               <div className="flex flex-wrap gap-2 mb-3 min-h-[38px] p-2 bg-slate-50 rounded-2xl border border-slate-100">
                 {(contact.phoneNumbers || []).length === 0 ? (
@@ -329,41 +250,25 @@ export default function AdminDashboardPage() {
                   (contact.phoneNumbers || []).map((p, i) => (
                     <div key={i} className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
                       <span>{p}</span>
-                      <button 
-                        onClick={() => removePhone(i)} 
-                        className="text-rose-500 hover:text-rose-700 font-bold ml-1 transition"
-                      >
-                        ✕
-                      </button>
+                      <button onClick={() => removePhone(i)} className="text-rose-500 hover:text-rose-700 font-bold ml-1 transition">✕</button>
                     </div>
                   ))
                 )}
               </div>
 
               <div className="flex gap-2">
-                <input 
-                  className={inputClass} 
-                  value={newPhone} 
-                  onChange={(e) => setNewPhone(e.target.value)} 
-                  placeholder="+213..." 
-                />
-                <button onClick={addPhone} className={buttonSecondary}>
-                  Ajouter
-                </button>
+                <input className={inputClass} value={newPhone} onChange={(e) => setNewPhone(e.target.value)} placeholder="+213..." />
+                <button onClick={addPhone} className={buttonSecondary}>Ajouter</button>
               </div>
             </div>
 
             <div className="pt-4 border-t border-slate-100 flex items-center justify-end gap-3">
-              <button onClick={saveContact} className={buttonPrimary}>
-                Enregistrer les coordonnées
-              </button>
+              <button onClick={saveContact} className={buttonPrimary}>Enregistrer les coordonnées</button>
             </div>
           </div>
-
         </div>
 
       </div>
-
     </div>
   )
 }

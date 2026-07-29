@@ -1,5 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
+import { showNotification } from '../../../components/AdminNotification'
 
 type Client = { id?: number; name: string; logo: string }
 
@@ -9,7 +10,6 @@ export default function AdminClientsPage() {
   const [form, setForm] = useState<Partial<Client>>({ name: '', logo: '' })
   const [editingId, setEditingId] = useState<number | null>(null)
   const [draft, setDraft] = useState<Partial<Client>>({})
-  const [message, setMessage] = useState('')
   const [uploading, setUploading] = useState(false)
   const [uploadError, setUploadError] = useState('')
   const [search, setSearch] = useState('')
@@ -38,7 +38,7 @@ export default function AdminClientsPage() {
       const data = await res.json()
       setField(data.url)
     } catch (error) {
-      setUploadError('Échec de l’upload de l’image.')
+      setUploadError('Échec de l\'upload de l\'image.')
     } finally {
       setUploading(false)
     }
@@ -56,26 +56,24 @@ export default function AdminClientsPage() {
   }
 
   async function create() {
-    setMessage('')
     const res = await fetch('/api/admin/clients', { method: 'POST', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(form) })
     if (res.ok) {
       const added = await res.json()
       setClients([added, ...clients])
       setForm({ name: '', logo: '' })
-      setMessage('Client ajouté.')
-    } else setMessage('Erreur lors de l\'ajout.')
+      showNotification('Client ajouté avec succès.', 'success')
+    } else showNotification('Erreur lors de l\'ajout du client.', 'error')
   }
 
   async function update(item: Client) {
-    setMessage('')
     const res = await fetch(`/api/admin/clients/${item.id}`, { method: 'PUT', credentials: 'include', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(item) })
     if (res.ok) {
       const updated = await res.json()
       setClients(clients.map((c) => (c.id === updated.id ? updated : c)))
       setEditingId(null)
       setDraft({})
-      setMessage('Modifié.')
-    } else setMessage('Erreur lors de la modification.')
+      showNotification('Client modifié avec succès.', 'success')
+    } else showNotification('Erreur lors de la modification.', 'error')
   }
 
   async function remove(id?: number) {
@@ -84,8 +82,8 @@ export default function AdminClientsPage() {
     const res = await fetch(`/api/admin/clients/${id}`, { method: 'DELETE', credentials: 'include' })
     if (res.ok) {
       setClients(clients.filter((c) => c.id !== id))
-      setMessage('Supprimé.')
-    }
+      showNotification('Client supprimé.', 'success')
+    } else showNotification('Erreur lors de la suppression.', 'error')
   }
 
   const [showForm, setShowForm] = useState(false)
@@ -97,7 +95,7 @@ export default function AdminClientsPage() {
       <div className="space-y-2">
         <p className="text-sm uppercase tracking-[0.3em] text-indigo-200">Administration • Clients</p>
         <h2 className="text-2xl font-semibold">Gestion des clients</h2>
-        <p className="text-sm text-indigo-100">Total clients : {totalClients}</p>
+        <p className="text-sm text-indigo-100">Total clients&nbsp;: {totalClients}</p>
       </div>
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex flex-1 gap-2">
@@ -210,8 +208,6 @@ export default function AdminClientsPage() {
           </div>
         ))}
       </div>
-
-      {message ? <p className="text-sm text-indigo-100">{message}</p> : null}
     </div>
   )
 }

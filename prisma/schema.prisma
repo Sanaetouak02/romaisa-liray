@@ -61,28 +61,10 @@ model Service {
   updatedAt   DateTime @updatedAt
 }
 
-model Section {
-  id        Int      @id @default(autoincrement())
-  slug      String   @unique
-  title     String
-  content   String
-  order     Int      @default(0)
-  visible   Boolean  @default(true)
-  createdAt DateTime @default(now())
-}
-
 model Client {
   id          Int     @id @default(autoincrement())
   name        String
   logo        String?
   description String?
   website     String?
-}
-
-model ContactMessage {
-  id        Int      @id @default(autoincrement())
-  name      String
-  email     String
-  message   String
-  createdAt DateTime @default(now())
 }
